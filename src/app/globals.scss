@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: 0;
+}
+
+:root{
+    --white: #fff;
+    --black: #000;
+
+    --blue-400: #064873;
+    --blue-200: #152345;
+}
+
+button{
+    cursor: pointer;
+    
+}
+
+a{
+    color: inherit;
+    text-rendering: none;
+}
+
+body{
+    background-color: var(--white);
+}
+
+body, input, textarea, select, button{
+   // font:400, 1rem sans-serif; //1rem = 16px
+}
+
+@media(max-width: 720px){
+    html{
+        font-size: 87.5%; //14px
+    }
+}
+
+@media(max-width: 1080px){
+    html{
+        font-size: 93.75%; //15px
+    }
+}
