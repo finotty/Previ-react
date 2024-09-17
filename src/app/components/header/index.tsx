@@ -38,7 +38,7 @@ export default function Header(){
                 {/* Botão Home */}
                 <li  className={styles.menuItemHome}>
 
-                <Link className={styles.homeButton} href="/" passHref>
+                <Link className={styles.homeButton} href="/news/noticias-comunicados" passHref>
                     Home
                 </Link>
                 </li>
@@ -52,7 +52,7 @@ export default function Header(){
                     {activeMenu === 'news' && (
                         <ul className={styles.dropdownMenu}>
                         <li>
-                            <Link className={styles.dropdownItem} href="/Home" passHref>
+                            <Link className={styles.dropdownItem} href="/news/noticias-comunicados" passHref>
                              Notícias e Comunicações
                             </Link>
                         </li>
