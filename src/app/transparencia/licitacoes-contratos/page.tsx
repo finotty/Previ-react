@@ -2,11 +2,11 @@ import styles from "./styles.module.scss";
 
 
 
-export default function ConselhoAdministrativo() {
+export default function LicitacoesContratos() {
   return (
     <>
       <div className={styles.containerCenter}>
-        <h1>conselho ADM</h1>
+        <h1>Licitações e Contratos</h1>
       </div>
     </>
   );

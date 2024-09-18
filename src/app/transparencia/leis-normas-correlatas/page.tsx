@@ -2,11 +2,11 @@ import styles from "./styles.module.scss";
 
 
 
-export default function ConselhoAdministrativo() {
+export default function LeisNormasCorrelatas() {
   return (
     <>
       <div className={styles.containerCenter}>
-        <h1>conselho ADM</h1>
+        <h1>Leis e Normas Correlatas</h1>
       </div>
     </>
   );
