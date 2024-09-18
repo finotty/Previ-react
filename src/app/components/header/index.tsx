@@ -84,7 +84,7 @@ export default function Header(){
                             </Link>
                         </li>
                         <li>
-                            <Link className={styles.dropdownItem}  href="/Home" passHref>
+                            <Link className={styles.dropdownItem}  href="/governanca/comite-investimento" passHref>
                              Comitê de Investimentos
                             </Link>
                         </li>
@@ -158,7 +158,7 @@ export default function Header(){
                     {activeMenu === 'fale' && (
                         <ul className={styles.dropdownMenu}>
                         <li>
-                            <Link className={styles.dropdownItem}  href="/Home" passHref>
+                            <Link className={styles.dropdownItem}  href="/fale-conosco/contato" passHref>
                              Contatos
                             </Link>
                         </li>
