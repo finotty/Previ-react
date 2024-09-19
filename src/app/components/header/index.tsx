@@ -29,7 +29,7 @@ export default function Header(){
               src={logoImg}
               alt="Logo Previ"
               width={220}
-              height={70}
+              height={55}
               priority={true}
               quality={100}
             />  
