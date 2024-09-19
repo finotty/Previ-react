@@ -9,9 +9,8 @@ export default function ImageContainer(){
         <Image
          src={imag}
          alt=""
-         layout="responsive"
-         width={1980} 
-         height={175} 
+         layout="fill"
+         objectFit="cover"
          priority={true} 
          
         />
