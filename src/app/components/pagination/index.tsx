@@ -1,28 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import styles from "./styles.module.scss";
-import Card from "@/app/components/card";
+import styles from './styles.module.scss'
 
-
-export default function ManuaisOrientacoes() {
-  const data = [
-    {
-      id: 1,
-      title: 'MANUAL DE PROCEDIMENTOS DE ENVIO DE FOLHA DE PAGAMENTO - TCE-RJ',
-      date: '18/08/2023',
-      description: 'Este manual do Módulo de Folha de Pagamento do Sistema e-TCERJ descreve os procedimentos a serem ad...',
-      imageSrc: '/img 5.jpg'
-    },
-    {
-      id: 2,
-      title: 'SERVIDOR, QUAIS SÃO OS ATUAIS CRITÉRIOS QUE SÃO ADOTADOS PARA A SUA APOSENTADORIA?',
-      date: '25/07/2022',
-      description: 'Nesta semana tivemos a satisfação de presenciar a concessão da aposentadoria da servidora Valéri...',
-      imageSrc: '/img 6.jpg'
-    },
-    
-  
-];
+export default function Pagination({data}:any){
 
 const [currentPage, setCurrentPage] = useState(1);
 const cardsPerPage = 8;
@@ -43,28 +23,9 @@ const handleNextPage = () => {
   if (currentPage < totalPages) setCurrentPage(currentPage + 1);
   
 };
-  return (
-    <>
-      <div className={styles.containerCenter}>
-      <h2>Manuais e Orientações</h2>
-      <p>Manuais de procedimentos e orientações sobre as questões previdenciárias</p>
-      
-         {/* Container dos cards */}
-         <div className={styles.cardsContainer}>
-          {currentCards.map((item) => (
-            <Card 
-              key={item.id} 
-              title={item.title}
-              date={item.date}
-              description={item.description}
-              imageSrc={item.imageSrc}
-            />
-          ))}
-        </div>
-      {/* Paginação */}
-            { totalPages > 4  && (
 
-              <div className={styles.pagination}>
+    return(
+        <div className={styles.pagination}>
                 <button className={styles.pagButtonLeft} onClick={handlePreviousPage} disabled={currentPage === 1}>
                   {"<"} {/* Seta para a esquerda */}
                 </button>
@@ -84,8 +45,5 @@ const handleNextPage = () => {
                   {">"} {/* Seta para a direita */}
                 </button>
               </div>
-            )}
-    </div>
-    </>
-  );
+    )
 }

@@ -47,7 +47,7 @@
     align-items: center;
   
     button {
-      background-color: #007bff;
+      background-color: #0056b3;
       color: white;
       border: none;
       padding: 8px 12px;
@@ -68,4 +68,13 @@
     }
     .activePage {
       background-color: #0056b3;
+    }
+    .pagButtonLeft{
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        
+    }
+    .pagButtonRight{
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
     }

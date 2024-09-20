@@ -5,12 +5,27 @@
     outline: 0;
 }
 
+html, body {
+    //height: 100%; /* Garante que a altura da página seja 100% da tela */
+   // margin: 0;
+  //  padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
 :root{
     --white: #fff;
     --black: #000;
 
     --blue-400: #0D4268;
     --blue-200: #152345;
+}
+main{
+    flex: 1;
+}
+
+footer{
+    margin-top: auto;
 }
 
 button{
@@ -25,6 +40,7 @@ a{
 
 body{
     background-color: var(--white);
+    min-height: 100vh;
 }
 
 body, input, textarea, select, button{

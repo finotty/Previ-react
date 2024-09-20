@@ -38,19 +38,14 @@ export default function Footer() {
                  height={50}
                 />
               </Link>
-
-              
-                <Image className={styles.imgJaperi}
-                 src={japeri}
-                 alt=''
-                 width={50}
-                 height={50}
-                 
-                />
-              
-           
+         
+              <Image className={styles.imgJaperi}
+                src={japeri}
+                alt=''
+                width={50}
+                height={50} 
+              /> 
         </div>
-
       </div>
     </footer>
   );
