@@ -1,0 +1,90 @@
+.formContainer {
+    width: 100%;
+    max-width: 900px;
+    margin: 15px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(8, 8, 8, 0.1);
+    border: #0056b3 solid 1px;
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  
+    form {
+      display: flex;
+      flex-direction: column;
+  
+      label {
+        margin: 10px 0 5px;
+        //font-weight: bold;
+        font-size: 18px;
+        
+      }
+
+      input{
+        
+      }
+  
+      input,
+      select,
+      textarea {
+        width: 80%;
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        margin-bottom: 15px;
+      }
+  
+      textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+  
+      button {
+        background-color: #0056b3;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+  
+        &:hover {
+          background-color: #004494;
+        }
+      }
+    }
+  }
+  .inputContainer{
+    width: 100%;
+   // background-color: red;
+    display: flex;
+    justify-content: flex-end;
+    input{
+        margin-left: 15px;
+    }
+   
+  }
+
+  .buttonSendClear{
+    display: flex;
+    justify-content: flex-end;
+    button{
+        margin-left: 5px;
+    }
+    .clear{
+        background-color: #ffffff;
+        border: #004494 solid 1px;
+        color: #0056b3;
+        &:hover {
+            background-color: #004494;
+            color: #ffffff;
+            //border: #ffffff solid 2px;
+          }
+    }
+  }
+  

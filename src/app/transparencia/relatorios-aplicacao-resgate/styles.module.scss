@@ -1,0 +1,58 @@
+.containerCenter{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: 'wrap';
+    justify-content: 'center'; 
+    min-height: 65vh; /* Faz com que o container ocupe pelo menos 80% da altura da tela */
+}
+
+.containerMidia{
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  
+    button {
+      background-color: #0056b3;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      margin: 0 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: #0056b3;
+      }
+  
+      &:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+    }
+  
+    }
+    .activePage {
+      background-color: #0056b3;
+    }
+    .pagButtonLeft{
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        
+    }
+    .pagButtonRight{
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
