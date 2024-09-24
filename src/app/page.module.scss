@@ -1,27 +1,69 @@
-.containerCenter{
+.containerCenter {
     width: 100%;
     padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex-wrap: 'wrap';
-    justify-content: 'center'; 
-}
-
-.cardsContainer{
+    justify-content: center;
+    flex-wrap: wrap;
+    
+    h2 {
+      font-size: 1.8rem;
+      text-align: center;
+    }
+  
+    p {
+      font-size: 1rem;
+      text-align: center;
+      max-width: 600px;
+    }
+  
+    @media (max-width: 768px) {
+      padding: 5px;
+      h2 {
+        font-size: 1.6rem;
+      }
+  
+      p {
+        font-size: 0.9rem;
+      }
+    }
+  
+    @media (max-width: 480px) {
+      h2 {
+        font-size: 1.4rem;
+      }
+  
+      p {
+        font-size: 0.8rem;
+      }
+    }
+  }
+  
+  .cardsContainer {
     width: 80%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 5px;
-   
-}
-
-.button{
+  
+    @media (max-width: 768px) {
+     // width: 90%;
+      margin-top: 10px;
+    }
+  
+    @media (max-width: 480px) {
+      flex-direction: column;
+     // width: 80%;
+      margin-top: 15px;
+    }
+  }
+  
+  .button {
     width: 10%;
     background-color: #fff;
-    color: #4CAF50;
-    border: 1.5px solid #4CAF50;
+    color: #4caf50;
+    border: 1.5px solid #4caf50;
     padding: 10px 20px;
     border-radius: 5px;
     text-align: center;
@@ -32,10 +74,34 @@
       background-color: #45a049a1;
       color: #fff;
     }
-}
-.divButton{
+  
+    @media (max-width: 768px) {
+      width: 20%;
+    }
+  
+    @media (max-width: 480px) {
+      width: 50%;
+      
+    }
+  }
+  
+  .divButton {
     width: 66.8%;
     margin-top: 10px;
     display: flex;
     justify-content: end;
-}
+  
+    @media (max-width: 768px) {
+      width: 90%;
+      justify-content: center;
+      margin-top: 20px;
+    }
+  
+    @media (max-width: 480px) {
+      width: 100%;
+      justify-content: center;
+      margin-top: 25px;
+      display: none;
+    }
+  }
+  

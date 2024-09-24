@@ -45,6 +45,7 @@ return (
              <div className={styles.divNav}>
                 <button className={styles.navButton} onClick={previousImage}>
                  <Image
+                   className={styles.imgArrow}
                    src={setaEsqueda}
                    alt="Seta para esquerda"
                    width={60}
@@ -61,6 +62,7 @@ return (
                 />
                 <button className={styles.navButton} onClick={nextImage}>
                  <Image
+                 className={styles.imgArrow}
                  src={setaDireita}
                  alt="Seta para direita"
                  width={60}

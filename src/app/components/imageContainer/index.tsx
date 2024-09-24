@@ -20,6 +20,7 @@ export default function ImageContainer(){
 
 
             <Image
+            className={styles.imgLogo}
              src={logo}
              alt="logo"
              width={260}
@@ -32,6 +33,7 @@ export default function ImageContainer(){
              <div className={styles.divAli}></div>
              <h1>Instituto de Previdência do Município de Japeri</h1>
             <Image
+            className={styles.imgBrasao}
              src={imageBrasao}
              alt="brasao"
              width={120}

@@ -1,6 +1,10 @@
 .headerContainer {
     height: 5rem;
     background: var(--blue-400);
+
+    @media (max-width: 768px) {
+      height: 4rem; /* Ajustar altura em dispositivos móveis */
+    }
   }
   
   .headerContent {
@@ -11,13 +15,27 @@
     background: var(--blue-400);
     display: flex;
     align-items: center;
-  }
 
+    @media (max-width: 768px) {
+      padding: 0 8px;
+    }
+  }
+  .logo {
+    width: 180px; /* Ajustar largura da logo */
+    height: auto;
+  
+    @media (max-width: 768px) {
+      width: 130px; /* Reduzir tamanho da logo em telas menores */
+    }
+  }
   .homeButton{
     font-size: 21px;
     color: var(--white);
     text-decoration: none;
     font-weight: normal;
+     @media (max-width: 768px){
+       font-size: 16px;
+     }
  
   }
   .menuItemHome{
@@ -31,15 +49,33 @@
     margin-left: 20px;
     padding: 10px 20px;
     display: flex; 
+    @media (max-width: 768px) {
+      display: none; /* Esconder o menu em telas pequenas */
+     // flex-direction: column;
+    //  position: absolute;
+     // top: 4rem;
+     // right: 0;
+    //  background-color: var(--blue-400);
+    //  width: 100%;
+     // padding: 10px;
+   //   z-index: 1000;
+    }
     ul {
       display: flex;
       align-items: center;
+
     }
 
     li{
         &:hover{
             background-color: rgba(23, 104, 170, 0.411);
             border-radius: 6px;
+        }
+
+        @media (max-width: 768px) {
+          width: 100%;
+          padding: 10px;
+          text-align: center;
         }
     }
     
@@ -58,6 +94,14 @@
       color: var(--white);
       
     }
+
+    @media (max-width: 768px){
+      button{
+        font-size: 14px;
+        gap: 1px;
+       // background-color: red;
+      }
+    }
   }
   
   .menuItem {
@@ -69,8 +113,31 @@
     border: none; 
     font-size: 16px; 
     position: relative;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      font-size: 14px;
+      padding: 2px;
+    }
   }
   
+  .hamburger {
+    display: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+  
+    @media (max-width: 768px) {
+      display: block;
+      font-size: 24px;
+      color: white;
+    }
+  }
+
+  .hamburger.active + .nav ul {
+    display: flex; /* Mostrar o menu ao clicar no ícone */
+  }
+
   .menuItemWithDropdown {
     position: relative;
   }
@@ -89,10 +156,49 @@
     width: 300px;
     flex-direction: column;
     list-style: none;
+
+    @media (max-width: 768px) {
+      width: 180px;
+     // position: relative;
+      //top: 0;
+      //width: 100%;
+      //padding: 0;
+      //box-shadow: none;
+    }
+
     li{
         width: 100%;      
     }
     
+  }
+  .dropdownMenuFale{
+    position: absolute; 
+    top: calc(100% + 5px); 
+    display: flex;
+    left: 0;
+    background-color: var(--white);
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    z-index: 1000;
+    width: 300px;
+    flex-direction: column;
+    list-style: none;
+
+    @media (max-width: 768px) {
+      width: 130px;
+      left: -23px;
+     // position: relative;
+      //top: 0;
+      //width: 100%;
+      //padding: 0;
+      //box-shadow: none;
+    }
+
+    li{
+        width: 100%;      
+    }
   }
   
   .dropdownItem {
@@ -104,6 +210,13 @@
     white-space: nowrap;
     border-bottom: var(--black) solid 1px;
     font-size: 18px;
+
+    @media (max-width: 768px) {
+      padding: 15px;
+      font-size: 14px;
+      text-align: center;
+      text-wrap: wrap;
+    }
     
   }
   
@@ -111,3 +224,31 @@
     background-color: #f0f0f0; /* Estilo ao passar o mouse */
   }
   
+  .navMobile{
+    display: none;
+    flex-direction: column;
+    @media (max-width: 768px){
+      display: flex; /* Mostrar o menu mobile em telas pequenas */
+      position: absolute;
+      top: 4rem;
+      right: 0;
+      background-color: var(--blue-400);
+      width: 100%;
+      padding: 10px;
+      z-index: 1000; 
+    }
+    ul {
+      display: flex;
+      align-items: center;
+    }
+
+    li{
+        &:hover{
+            background-color: rgba(23, 104, 170, 0.411);
+            border-radius: 6px;
+        }       
+    }   
+  }
+  .showMenu {
+    display: flex !important; /* Exibir o menu ao clicar no botão hamburger em telas pequenas */
+  }

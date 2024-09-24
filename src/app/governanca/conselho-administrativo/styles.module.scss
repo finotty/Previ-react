@@ -7,6 +7,14 @@
     flex-wrap: 'wrap';
     justify-content: 'center'; 
     min-height: 65vh; /* Faz com que o container ocupe pelo menos 80% da altura da tela */
+    @media (max-width:768px){
+      h2{
+        font-size: 18px;
+      }
+      p{
+        font-size: 12px;
+      }
+    }
 }
 
 .containerMidia{

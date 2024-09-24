@@ -28,12 +28,14 @@ const Contato = () => {
 
   return (
     <div className={styles.formContainer}>
-      <h1>Formulário de Contato</h1>
-      
+      <div className={styles.divHead}>
+        <h1>Formulário de Contato</h1>
+        <p>* Campos de preenchimento obrigatório</p>
+      </div>
       <form onSubmit={handleSubmit}>
         {/* Nome completo */}
         <div className={styles.inputContainer}>
-           <label htmlFor="nomeCompleto">Nome completo *</label>
+           <label className={styles.inputLabel} htmlFor="nomeCompleto">Nome completo *</label>
             <input
               type="text"
               id="nomeCompleto"
@@ -46,7 +48,7 @@ const Contato = () => {
         </div>
         {/* Matrícula */}
         <div className={styles.inputContainer}>
-          <label htmlFor="matricula">Matrícula *</label>
+          <label className={styles.inputLabel} htmlFor="matricula">Matrícula *</label>
           <input
             type="text"
             id="matricula"
@@ -59,7 +61,7 @@ const Contato = () => {
         </div>
         {/* Status */}
         <div className={styles.inputContainer}>
-        <label htmlFor="status">Estatus *</label>
+        <label className={styles.inputLabel} htmlFor="status">Status *</label>
         <select
           id="status"
           name="status"
@@ -76,7 +78,7 @@ const Contato = () => {
         </div>
         {/* E-mail */}
         <div className={styles.inputContainer}>
-        <label htmlFor="email">Seu e-mail *</label>
+        <label className={styles.inputLabel} htmlFor="email">Seu e-mail *</label>
         <input
           type="email"
           id="email"
@@ -89,7 +91,7 @@ const Contato = () => {
         </div>
         {/* Serviço */}
         <div className={styles.inputContainer}>
-        <label htmlFor="servico">Serviço *</label>
+        <label className={styles.inputLabel} htmlFor="servico">Serviço *</label>
         <select
           id="servico"
           name="servico"
@@ -108,7 +110,7 @@ const Contato = () => {
         </div>
         {/* Mensagem */}
         <div className={styles.inputContainer}>
-        <label htmlFor="mensagem">Mensagem *</label>
+        <label className={styles.inputLabel} htmlFor="mensagem">Mensagem *</label>
         <textarea
           id="mensagem"
           name="mensagem"
@@ -121,7 +123,7 @@ const Contato = () => {
 
          <div className={styles.buttonSendClear}>
           <button className={styles.clear} type="submit">Limpar</button>
-          <button type="submit">Enviar</button>
+          <button className={styles.send} type="submit">Enviar</button>
         </div>
       </form>
     </div>
