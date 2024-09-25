@@ -175,6 +175,7 @@ export default function Header(){
         </nav>
 
            <nav className={styles.nav}>
+            
             <ul className={styles.menu}>
                 {/* Botão Home */}
                 <li  className={styles.menuItemHome}>
@@ -311,9 +312,17 @@ export default function Header(){
                         </ul>
                     )}
                  </li>
+                 {/* Botão Entrar */}
+              
             </ul>
+            
     </nav>
          </div>
+            <div  className={styles.buttonLogin}>
+            <Link className={styles.homeButton} href="/login" passHref>
+                Entrar
+            </Link>
+            </div>
         </header>
     )
 }

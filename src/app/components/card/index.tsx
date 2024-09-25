@@ -1,9 +1,11 @@
 import React from "react";
 import styles from "./styles.module.scss"
 import Image from "next/image";
+import imagePDF from "../../../assets/IMG-pdf.png"
+import Link from "next/link";
 
 
-const Card = ({ imageSrc, title, date, description }:any) => {
+const Card = ({  doc,title, date, description }:any) => {
     return (
       <div className={styles.cardContainer}>
         <div className={styles.cardContent}>
@@ -11,10 +13,14 @@ const Card = ({ imageSrc, title, date, description }:any) => {
           <div className={styles.divDate}>
             <p className={styles.cardDate}>{date}</p>
           </div>
-        <Image className={styles.cardImage} width={599} height={396} src={imageSrc} alt={title} quality={100} priority={true}/>
-          <p className={styles.cardDescription}>{description}</p>
+        <Image className={styles.cardImage} width={599} height={396} src={imagePDF} alt={title} quality={100} priority={true}/>
+          <p className={styles.cardDescription}>{description.length > 150 ? description.substring(0, 150) + "..." : description}</p>
         </div>
-          <button className={styles.cardButton}>Leia mais</button>
+
+         <Link  className={styles.cardButton} href={doc} target="_blank" rel="noopener noreferrer" >
+           Leia mais
+         </Link>
+        
       </div>
     );
   };

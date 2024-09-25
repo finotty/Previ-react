@@ -1,9 +1,13 @@
 .headerContainer {
+  display: flex;
     height: 5rem;
     background: var(--blue-400);
-
+    //background-color: green;
+   
+   justify-content: space-between;
+   align-items: center;
     @media (max-width: 768px) {
-      height: 4rem; /* Ajustar altura em dispositivos móveis */
+      height: 3.5rem; /* Ajustar altura em dispositivos móveis */
     }
   }
   
@@ -15,9 +19,12 @@
     background: var(--blue-400);
     display: flex;
     align-items: center;
-
+    //background-color: greenyellow;
+    //justify-content: space-between;
     @media (max-width: 768px) {
       padding: 0 8px;
+      justify-content: center;
+      margin-top: -10px;
     }
   }
   .logo {
@@ -26,6 +33,7 @@
   
     @media (max-width: 768px) {
       width: 130px; /* Reduzir tamanho da logo em telas menores */
+
     }
   }
   .homeButton{
@@ -45,10 +53,29 @@
     align-items: center;
     justify-content: center;
   }
+  .buttonLogin{
+   // margin-top: 20px;
+    margin-left: -20px;
+    margin-right: 10px;
+    width: 70px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    //align-self: flex-end;
+    //background-color: red;
+    //z-index: 1000;
+
+    @media(max-width: 768px){
+      display: none;
+    }
+    
+  }
   .nav {
     margin-left: 20px;
     padding: 10px 20px;
     display: flex; 
+    //background-color: blue;
     @media (max-width: 768px) {
       display: none; /* Esconder o menu em telas pequenas */
      // flex-direction: column;
@@ -99,7 +126,6 @@
       button{
         font-size: 14px;
         gap: 1px;
-       // background-color: red;
       }
     }
   }
@@ -159,11 +185,7 @@
 
     @media (max-width: 768px) {
       width: 180px;
-     // position: relative;
-      //top: 0;
-      //width: 100%;
-      //padding: 0;
-      //box-shadow: none;
+
     }
 
     li{
@@ -188,12 +210,7 @@
 
     @media (max-width: 768px) {
       width: 130px;
-      left: -23px;
-     // position: relative;
-      //top: 0;
-      //width: 100%;
-      //padding: 0;
-      //box-shadow: none;
+      left: -50px;  
     }
 
     li{
@@ -230,7 +247,7 @@
     @media (max-width: 768px){
       display: flex; /* Mostrar o menu mobile em telas pequenas */
       position: absolute;
-      top: 4rem;
+      top: 3rem;
       right: 0;
       background-color: var(--blue-400);
       width: 100%;
