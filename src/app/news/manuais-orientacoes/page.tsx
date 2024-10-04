@@ -11,14 +11,14 @@ export default function ManuaisOrientacoes() {
       title: 'MANUAL DE PROCEDIMENTOS DE ENVIO DE FOLHA DE PAGAMENTO - TCE-RJ',
       date: '18/08/2023',
       description: 'Este manual do Módulo de Folha de Pagamento do Sistema e-TCERJ descreve os procedimentos a serem ad...',
-      doc:'/doc/noticias-comunicados/doc6586018181250.pdf',
+      doc:'/doc/manuais-orientacoes-pdf/doc9417384887116.pdf',
     },
     {
       id: 2,
       title: 'SERVIDOR, QUAIS SÃO OS ATUAIS CRITÉRIOS QUE SÃO ADOTADOS PARA A SUA APOSENTADORIA?',
       date: '25/07/2022',
       description: 'Nesta semana tivemos a satisfação de presenciar a concessão da aposentadoria da servidora Valéri...',
-      doc:'/doc/noticias-comunicados/doc6586018181250.pdf',
+      doc:'/doc/manuais-orientacoes-pdf/doc5104222917594.pdf',
     },
     
   

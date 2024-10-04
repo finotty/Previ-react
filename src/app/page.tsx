@@ -66,7 +66,12 @@ export default function Home() {
       description: 'O Instituto de Previdência dos Servidores Públicos do Município de Japeri (Previ-Japeri) conquistou, nesta terça-feira (25), o Certificado de Regularidade Previdenciária (CRP) administrativamente – documento que comprova que o Instituto segue normas de boa gestão e assegura o pagamento dos benefícios aos aposentados e pensionistas. Na Baixada Fluminense, apenas quatro municípios têm o CRP válido, sendo que três deles obtiveram a certificação judicialmente. Os outros seis não tem o documento.',
       doc:'/doc/noticias-comunicados-pdf/docInstituto-Previdência-conquista.pdf',
     },
-    
+    {
+      title: 'SERVIDOR, QUAIS SÃO OS ATUAIS CRITÉRIOS QUE SÃO ADOTADOS PARA A SUA APOSENTADORIA',
+      date: '06/06/2022',
+      description: 'Nesta semana tivemos a satisfação de presenciar a concessão da aposentadoria da servidora Valéria de Sousa Couto, professora da Escola Municipal Bernardino de Melo, estatutária que cumpriu todos os critérios da aposentadoria especial de professores. Este evento tão especial e dezenas de consultas ao Instituto sobre o que mudou no regime de aposentadoria dos servidores públicos do município de Japeri como consequência da atualização da lei que regulamenta a concessão de aposentadoria e pensões aos servidores do município, nos motivou a disponibilizar este manual de orientação sobre os critérios hoje aplicados para a concessão de benefícios previdenciários da Previ-Japeri.',
+      doc:'/doc/noticias-comunicados-pdf/doc3291135409242.pdf',
+    },
   ];
   return (
     <>
