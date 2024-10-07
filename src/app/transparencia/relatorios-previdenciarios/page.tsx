@@ -8,100 +8,144 @@ export default function RelatoriosPrevidenciarios() {
   const data = [
     { 
       id:1,   
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0022024.pdf',
-      date:'MARÇO/2024'
+      docName:'DIPR 2023',
+      doc:'/doc/relatorios-previdenciarios-pdf/doc8075174907443.pdf',
+      date:'NOVEMBRO/DEZEMBRO'
     },
-    {
-      id:2,
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0032024.pdf',
-      date:'FEVEREIRO/2024'
+    { 
+      id:2,   
+      docName:'DIPR 2023',
+      doc:'/doc/relatorios-previdenciarios-pdf/doc0672318103334.pdf',
+      date:'SETEMBRO/OUTUBRO'
     },
     { 
       id:3,   
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0022024.pdf',
-      date:'MARÇO/2024'
+      docName:'DIPR 2023',
+      doc:'/doc/relatorios-previdenciarios-pdf/doc6090940650725.pdf',
+      date:'JULHO/AGOSTO'
     },
-    {
-      id:4,
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0032024.pdf',
-      date:'FEVEREIRO/2024'
+    { 
+      id:4,   
+      docName:'DIPR 2023',
+      doc:'/doc/relatorios-previdenciarios-pdf/doc7373534590593.pdf',
+      date:'MAIO/JUNHO'
     },
     { 
       id:5,   
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0022024.pdf',
-      date:'MARÇO/2024'
+      docName:'DIPR 2023',
+      doc:'/doc/relatorios-previdenciarios-pdf/doc5514316437785.pdf',
+      date:'MARÇO/ABRIL'
     },
-    {
-      id:6,
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0032024.pdf',
-      date:'FEVEREIRO/2024'
+    { 
+      id:6,   
+      docName:'DIPR 2023',
+      doc:'/doc/relatorios-previdenciarios-pdf/doc4837150358445.pdf',
+      date:'Janeiro/Fevereiro'
     },
     { 
       id:7,   
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0022024.pdf',
-      date:'MARÇO/2024'
+      docName:'DIPR 2022',
+      doc:'/doc/relatorios-previdenciarios-pdf/doc4051921083331.pdf',
+      date:'Novembro/Dezembro'
     },
-    {
-      id:8,
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0032024.pdf',
-      date:'FEVEREIRO/2024'
+    { 
+      id:8,   
+      docName:'DIPR 2022',
+      doc:'/doc/relatorios-previdenciarios-pdf/doc1679196811567.pdf',
+      date:'Setembro/Outubro'
     },
     { 
       id:9,   
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0022024.pdf',
-      date:'MARÇO/2024'
+      docName:'DIPR 2022',
+      doc:'/doc/relatorios-previdenciarios-pdf/doc9350104674876.pdf',
+      date:'Julho/Agosto'
     },
-    {
-      id:10,
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0032024.pdf',
-      date:'FEVEREIRO/2024'
+    { 
+      id:10,   
+      docName:'DIPR 2022',
+      doc:'/doc/relatorios-previdenciarios-pdf/doc2741435655706.pdf',
+      date:'Maio/Junho'
     },
     { 
       id:11,   
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0022024.pdf',
-      date:'MARÇO/2024'
-    },
-    {
-      id:12,
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0032024.pdf',
-      date:'FEVEREIRO/2024'
+      docName:'DIPR 2022',
+      doc:'/doc/relatorios-previdenciarios-pdf/doc3294371599739.pdf',
+      date:'Janeiro/Fevereiro'
     },
     { 
-      id:13,   
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0022024.pdf',
-      date:'MARÇO/2024'
+      id:12,   
+      docName:'DIPR 2021',
+      doc:'/doc/relatorios-previdenciarios-pdf/doc5188097480308.pdf',
+      date:'Novembro/Dezembro'
     },
-    {
-      id:14,
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0032024.pdf',
-      date:'FEVEREIRO/2024'
+    /////////////////////////////////////////////////////
+    { 
+      id:13,   
+      docName:'DIPR 2021',
+      doc:'/doc/relatorios-previdenciarios-pdf/doc0121567003946.pdf',
+      date:'Setembro/Outubro'
+    },
+    { 
+      id:14,   
+      docName:'DIPR 2021',
+      doc:'/doc/relatorios-previdenciarios-pdf/doc7191906076142.pdf',
+      date:'Julho/Agosto'
     },
     { 
       id:15,   
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0022024.pdf',
-      date:'MARÇO/2024'
+      docName:'DIPR 2021',
+      doc:'/doc/relatorios-previdenciarios-pdf/doc8092959949046.pdf',
+      date:'Maio/Junho'
     },
-    {
-      id:16,
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0032024.pdf',
-      date:'FEVEREIRO/2024'
+    { 
+      id:16,   
+      docName:'DIPR 2021',
+      doc:'/doc/relatorios-previdenciarios-pdf/doc2231898893351.pdf',
+      date:'Março/Abril'
     },
+    { 
+      id:17,   
+      docName:'DIPR 2021',
+      doc:'/doc/relatorios-previdenciarios-pdf/doc1980873209485.pdf',
+      date:'Janeiro/Fevereiro'
+    },
+    { 
+      id:18,   
+      docName:'DIPR 2020',
+      doc:'/doc/relatorios-previdenciarios-pdf/doc5492567999429.pdf',
+      date:'Novembro/Dezembro'
+    },
+    { 
+      id:19,   
+      docName:'DIPR 2020',
+      doc:'/doc/relatorios-previdenciarios-pdf/doc7564663768615.pdf',
+      date:'Setembro/Outubro'
+    },
+    { 
+      id:20,   
+      docName:'DIPR 2020',
+      doc:'/doc/relatorios-previdenciarios-pdf/doc7479764310855.pdf',
+      date:'Julho/Agosto'
+    },
+    { 
+      id:21,   
+      docName:'DIPR 2020',
+      doc:'/doc/relatorios-previdenciarios-pdf/doc5461257799424.pdf',
+      date:'Maio/Junho'
+    },
+    { 
+      id:22,   
+      docName:'DIPR 2020',
+      doc:'/doc/relatorios-previdenciarios-pdf/doc5837409825951.pdf',
+      date:'Março/Abril'
+    },
+    { 
+      id:23,   
+      docName:'DIPR 2020',
+      doc:'/doc/relatorios-previdenciarios-pdf/doc8827132218806.pdf',
+      date:'Janeiro/Fevereiro'
+    },
+
   ]
 
 const [currentPage, setCurrentPage] = useState(1);

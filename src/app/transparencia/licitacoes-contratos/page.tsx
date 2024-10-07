@@ -8,100 +8,132 @@ export default function LicitacoesContratos() {
   const data = [
     { 
       id:1,   
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0022024.pdf',
-      date:'MARÇO/2024'
+      docName:'EDITAL DO CLUBE DE DESCONTO PREVI-JAPERI',
+      doc:'/doc/licitacoes-contratos-pdf/doc4142373650273.pdf',
+      date:'Clube de desconto PREVI-JAPERI'
     },
-    {
-      id:2,
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0032024.pdf',
-      date:'FEVEREIRO/2024'
+    { 
+      id:2,   
+      docName:'Contrato de Sistema Integrado Previdenciário',
+      doc:'/doc/licitacoes-contratos-pdf/doc8720234723593.pdf',
+      date:'Exercício 2023'
     },
     { 
       id:3,   
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0022024.pdf',
-      date:'MARÇO/2024'
+      docName:'Contrato de Consultoria Atuarial',
+      doc:'/doc/licitacoes-contratos-pdf/doc1439949634808.pdf',
+      date:'Exercício 2023'
     },
-    {
-      id:4,
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0032024.pdf',
-      date:'FEVEREIRO/2024'
+    { 
+      id:4,   
+      docName:'Aditivo de Contrato de Custódia BB',
+      doc:'/doc/licitacoes-contratos-pdf/doc6621522092840.pdf',
+      date:'Custódia BB 2023'
     },
     { 
       id:5,   
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0022024.pdf',
-      date:'MARÇO/2024'
+      docName:'Edital de Pregão Eletrônico',
+      doc:'/doc/licitacoes-contratos-pdf/doc9644242027443.pdf',
+      date:'SISTEMA DE GESTÃO PREVIDENCIÁRIA'
     },
-    {
-      id:6,
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0032024.pdf',
-      date:'FEVEREIRO/2024'
+    { 
+      id:6,   
+      docName:'Edital de Dispensa de Licitação ',
+      doc:'/doc/licitacoes-contratos-pdf/doc7747247574853.pdf',
+      date:'CONSULTORIA E ASSESSORIA PREVIDENCIÁRIA E ATUARIAL'
     },
     { 
       id:7,   
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0022024.pdf',
-      date:'MARÇO/2024'
+      docName:'Edital Dispensa de Licitação',
+      doc:'/doc/licitacoes-contratos-pdf/doc6637949244225.pdf',
+      date:'CURSO PREPARATÓRIO CERTIFICAÇÃO RPPS'
     },
-    {
-      id:8,
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0032024.pdf',
-      date:'FEVEREIRO/2024'
+    { 
+      id:8,   
+      docName:'Contrato Custódia Qualificada',
+      doc:'/doc/licitacoes-contratos-pdf/doc4026862263658.pdf',
+      date:'CAIXA ECONÔMICA FEDERAL'
     },
     { 
       id:9,   
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0022024.pdf',
-      date:'MARÇO/2024'
+      docName:'Contrato Dataprev',
+      doc:'/doc/licitacoes-contratos-pdf/doc0442549711976.pdf',
+      date:'SISTEMA COMPREV'
     },
-    {
-      id:10,
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0032024.pdf',
-      date:'FEVEREIRO/2024'
+    { 
+      id:10,   
+      docName:'Termo de Adesão Compensação Previdenciária',
+      doc:'/doc/licitacoes-contratos-pdf/doc2462657969178.pdf',
+      date:'COMPREV'
     },
     { 
       id:11,   
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0022024.pdf',
-      date:'MARÇO/2024'
-    },
-    {
-      id:12,
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0032024.pdf',
-      date:'FEVEREIRO/2024'
+      docName:'Contrato Custódia Qualificada',
+      doc:'/doc/licitacoes-contratos-pdf/doc4639543894915.pdf',
+      date:'BANCO DO BRASIL'
     },
     { 
-      id:13,   
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0022024.pdf',
-      date:'MARÇO/2024'
+      id:12,   
+      docName:'Contrato Crédito e Mercado',
+      doc:'/doc/licitacoes-contratos-pdf/doc0112023509191.pdf',
+      date:'2022'
     },
-    {
-      id:14,
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0032024.pdf',
-      date:'FEVEREIRO/2024'
+    //////////////////////////////////////////////////
+    { 
+      id:13,   
+      docName:'Contrato de Serviços Atuariais',
+      doc:'/doc/licitacoes-contratos-pdf/.pdf',
+      date:'2022'
+    },
+    { 
+      id:14,   
+      docName:'Contrato de Serviços Atuariais',
+      doc:'/doc/licitacoes-contratos-pdf/.pdf',
+      date:'2020'
     },
     { 
       id:15,   
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0022024.pdf',
-      date:'MARÇO/2024'
+      docName:'Aditivo Sistema Contábil e Previdenciário',
+      doc:'/doc/licitacoes-contratos-pdf/.pdf',
+      date:'2022'
     },
-    {
-      id:16,
-      docName:'ATA DIRETORIA EXECUTIVA',
-      doc:'/doc/ATADR0032024.pdf',
-      date:'FEVEREIRO/2024'
+    { 
+      id:16,   
+      docName:'Aditivo Sistema Contábil e Previdenciário',
+      doc:'/doc/licitacoes-contratos-pdf/.pdf',
+      date:'2021'
     },
+    { 
+      id:17,   
+      docName:'Contrato Agenda Sistema Contábil e Previdenciário',
+      doc:'/doc/licitacoes-contratos-pdf/.pdf',
+      date:'2019'
+    },
+    { 
+      id:18,   
+      docName:'Contrato Caixa Econômica Federal',
+      doc:'/doc/licitacoes-contratos-pdf/.pdf',
+      date:'2021/2024'
+    },
+    { 
+      id:19,   
+      docName:'Edital de Credenciamento Instituições Financeiras',
+      doc:'/doc/licitacoes-contratos-pdf/.pdf',
+      date:'2021/2024'
+    },
+    { 
+      id:20,   
+      docName:'Convênio Consignado Banco do Brasil',
+      doc:'/doc/licitacoes-contratos-pdf/.pdf',
+      date:'2021/2024'
+    },
+    { 
+      id:21,   
+      docName:'Convênio Consignado Itau-Unibanco',
+      doc:'/doc/licitacoes-contratos-pdf/.pdf',
+      date:'2021/2024'
+    },
+  
   ]
 
 const [currentPage, setCurrentPage] = useState(1);
