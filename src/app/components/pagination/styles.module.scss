@@ -1,0 +1,43 @@
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  
+    button {
+      background-color: #0056b3;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      margin: 0 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: #0056b3;
+      }
+  
+      &:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+    }
+  
+    }
+    .activePage {
+      background-color: #152345 !important;
+      font-weight: bold; 
+      font-size: 18px;
+      color: white; 
+      border-radius: 5px;
+    }
+    .pagButtonLeft{
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        
+    }
+    .pagButtonRight{
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }

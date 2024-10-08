@@ -1,13 +1,11 @@
-"use client";
-import React, { useState } from "react";
+import React from "react";
 import styles from "./styles.module.scss"
 import Image from "next/image";
 import imgPDF from "../../../assets/IMG-pdf.png";
 import Link from "next/link";
 
-
 const CardPDF = ({doc,docName,date}:any) => {
- 
+
 return (
     <>
       <div className={styles.cardContainer} >

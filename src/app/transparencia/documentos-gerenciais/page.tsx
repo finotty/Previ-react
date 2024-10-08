@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import styles from "./styles.module.scss";
 import Card from "../../components/card";
+import Pagination from "@/app/components/pagination";
 
 export default function DocumentosGerenciais() {
 //
@@ -117,7 +118,9 @@ export default function DocumentosGerenciais() {
   // Mudar para a próxima página
   const handleNextPage = () => {
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
-    
+  };
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
   return (
     <>
@@ -138,26 +141,13 @@ export default function DocumentosGerenciais() {
           ))}
         </div>
       {/* Paginação */}
-             <div className={styles.pagination}>
-                <button className={styles.pagButtonLeft} onClick={handlePreviousPage} disabled={currentPage === 1}>
-                  {"<"} {/* Seta para a esquerda */}
-                </button>
-                
-                {/* Números de páginas */}
-                {Array.from({ length: totalPages }, (_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentPage(index + 1)}
-                    className={currentPage === index + 1 ? styles.activePage : ""}
-                  >
-                    {index + 1}
-                  </button>
-                ))}
-
-                <button className={styles.pagButtonRight} onClick={handleNextPage} disabled={currentPage === totalPages}>
-                  {">"} {/* Seta para a direita */}
-                </button>
-              </div>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPreviousPage={handlePreviousPage}
+            onNextPage={handleNextPage}
+            onPageChange={handlePageChange}
+          />
     </div>
   </>
   );
