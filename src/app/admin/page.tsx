@@ -1,15 +1,23 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './styles.module.scss';
+import { app, db, storage } from '@/bd/firebaseConfig';
+import { collection, addDoc,Timestamp  } from 'firebase/firestore';
+import { ref, uploadBytes } from 'firebase/storage';
+import { getAuth , onAuthStateChanged, Auth} from "firebase/auth";
 export default function UploadPage() {
   const [formData, setFormData] = useState({
     pagina:"",
     sub:"",
   });
-  const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [date, setDate] = useState('');
+  const [file, setFile] = useState<File | null>(null);
 
+  const [isloading, setIsloading] = useState(true);
+  const [user, setUser ]= useState<any>();
+  const auth = getAuth(app);
   // Definindo as opções com base na página selecionada
   const optionsMap: Record<string, { value: string; label: string }[]> = {
     news: [
@@ -42,15 +50,57 @@ export default function UploadPage() {
     });    
   };
 
-  const handleSubmit = () => {
-    // Lógica para enviar o formulário ou validação
-    console.log("pagina:", formData.pagina);
-    console.log("opção:", formData.sub);
-    console.log("text:", title);
-    console.log("data:", date);
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setFile(e.target.files[0]);
+    }
   };
 
+
+  const handleSubmit = async (e: React.FormEvent)=> {
+    e.preventDefault();
+    if (!file) return;
+
+
+    // Salva o arquivo no Storage
+    const fileRef = ref(storage, `uploads/${file.name}`);
+    await uploadBytes(fileRef, file);
+
+
+    // Salva as informações no Firestore
+    const local = `${formData.pagina}-${formData.sub}`;
+
+    const docRef = await addDoc(collection(db, local), {
+      title,
+      description,
+      date,
+      fileUrl: `uploads/${file.name}`,
+      created_at: Timestamp.now()
+    })
+   
+    console.log('Documento escrito com ID: ', docRef.id);
+    setTitle('');
+    setDescription('');
+    setDate('');
+    setFile(null);
+
+  };
+
+  useEffect(() => {
+    
+    onAuthStateChanged(auth,response => {           
+           if(response)
+            setIsloading(false);
+    });
+       
+},[])
   return (
+    <>{ isloading ? (
+      <div className={styles.loadingContainer}>
+        <div className={styles.spinner}></div>
+        <p>Carregando informações...</p>
+      </div>
+    ) :
     <div className={styles.container}>
        <div className={styles.content}>
         <div className={styles.divForm}>
@@ -77,14 +127,14 @@ export default function UploadPage() {
                   onChange={handleChange}
                   required
                 >
-                  <option value="">Selecione uma opção</option>
+                  <option value="">Selecione uma pagina</option>
                   <option value="home">Home</option>
                   <option value="news">News</option>
                   <option value="governanca">Governança</option>
                   <option value="transparencia">Transparencia</option>
                 </select>
 
-                <label>Sub:</label>
+                <label className={styles.labelSub}>Sub:</label>
                 <select
                   id="sub"
                   name="sub"
@@ -104,13 +154,13 @@ export default function UploadPage() {
                 </select>
               </div>
 
-                <input type='text' value={title} onChange={e => setTitle(e.target.value)} />
+                <input type='text' value={title} onChange={e => setTitle(e.target.value)} placeholder='Digite o titulo do documento' required/>
                 
-                <input type='date' value={date} onChange={e => setDate(e.target.value)}/>
+                <input type='date' value={date} onChange={e => setDate(e.target.value)} required/>
        
-                <textarea value={description} onChange={e => setDescription(e.target.value)} />
+                <textarea value={description} onChange={e => setDescription(e.target.value)} placeholder='Digite uma breve descrição sobre o conteúdo do documento'/>
     
-                <input type="file" accept="application/pdf"   />      
+                <input type="file" accept="application/pdf" onChange={handleFileChange} required />      
               
               <button type='submit' className={styles.buttonSend}>Enviar</button>
               </div>
@@ -119,5 +169,8 @@ export default function UploadPage() {
         </div>
        </div>
     </div>
+   
+  }
+    </>
   );
 }

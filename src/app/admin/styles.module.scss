@@ -11,6 +11,9 @@
   border: solid 1px #000;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  @media (max-width:768px){
+    width: 95%;
+  }
 }
 
 .divForm{
@@ -23,6 +26,12 @@
   }
   h5{
     color: #4241418f;
+  }
+
+  @media(max-width: 768px){
+    h1{
+      font-size: 16px;
+    }
   }
   
   form{
@@ -45,6 +54,11 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  @media(max-width:768px){
+    width: 100%;
+    margin-left: 0;
+  }
+
 }
 
 .divLabel{
@@ -53,12 +67,20 @@
   align-items: flex-end;
   margin-bottom: 50px;
   margin-right: 5px;
-
+  
+  @media(max-width:768px){
+    display: none;
+  }
 }
 .divInputs{
   display: flex;
   flex-direction: column;
   margin-top: 40px;
+  //background-color: red;
+  @media(max-width:768px){
+    width: 100%;
+    align-items: center;
+  }
   select{
     margin-right: 10px;
   }
@@ -68,10 +90,28 @@
     width: 100%;
     border-radius: 5px;
     padding-left: 3px;
+    @media(max-width:768px){
+      width: 95%;
+    }
+    &::placeholder{
+      color: #aaa; 
+      opacity: 1; 
+      font-size: 14px;    
+    }
   }
   textarea{
     margin-bottom: 10px;
     height: 60px;
+    padding:3px;
+    @media(max-width:768px){
+      width: 95%;
+    }
+    &::placeholder{
+      color: #aaa; 
+      opacity: 1; 
+      font-size: 14px;
+      
+    }
   }
   div{
     margin-bottom: 50px;
@@ -81,6 +121,21 @@
 .divSelect{
   display: flex;
   margin-top: 5px;
+
+  @media(max-width:768px){
+    width: 95%;
+    flex-direction: column;
+    
+    select{
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+    .labelSub{
+      font-size: 14px;
+      margin-top: 5px;
+      
+    }
+  }
 }
 .labelPage{
   margin-top: 40px;
@@ -105,4 +160,31 @@
   border-radius: 5px;
   color: white;
   background-color: #0f851f;
+  @media(max-width:768px){
+    margin-right: 5px;
+  }
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh; /* O *loading* ocupa a tela toda */
+  flex-direction: column;
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border-left-color: #09f;
+  animation: spin 0.8s ease infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

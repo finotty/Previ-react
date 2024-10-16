@@ -3,9 +3,18 @@ import styles from "./styles.module.scss"
 import Image from "next/image";
 import imagePDF from "../../../assets/IMG-pdf.png"
 import Link from "next/link";
+import { storage } from "@/bd/firebaseConfig";
+import { ref, getDownloadURL } from 'firebase/storage';
 
 
 const Card = ({  doc,title, date, description }:any) => {
+  const handleDownload = (fileUrl: string) => {
+    const storageRef = ref(storage, fileUrl);
+    getDownloadURL(storageRef).then((url:string) => {
+      window.open(url);
+    });
+  };
+
     return (
       <div className={styles.cardContainer}>
         <div className={styles.cardContent}>
@@ -17,9 +26,10 @@ const Card = ({  doc,title, date, description }:any) => {
           <p className={styles.cardDescription}>{description.length > 150 ? description.substring(0, 150) + "..." : description}</p>
         </div>
 
-         <Link  className={styles.cardButton} href={doc} target="_blank" rel="noopener noreferrer" >
-           Leia mais
-         </Link>
+        
+         <button className={styles.cardButton} onClick={() => handleDownload(doc)} rel="noopener noreferrer">
+          Leia mais
+         </button>
         
       </div>
     );

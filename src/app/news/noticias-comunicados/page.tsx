@@ -1,20 +1,33 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import styles from "./styles.module.scss";
 import Card from "../../components/card";
 import Pagination from "@/app/components/pagination";
+import { db, storage} from '@/bd/firebaseConfig';
+import { Timestamp, collection, getDocs } from 'firebase/firestore';
+import { ref, getDownloadURL } from 'firebase/storage';
+
+
+interface Upload {
+  id: string;
+  title: string;
+  description: string;
+  date: string;
+  fileUrl: string;
+  created_at:Timestamp;
+}
 
 export default function noticiasEcomunicados() {
-
+  const [uploads, setUploads] = useState<Upload[]>([]);
   const data = [
-    {
+    {//foi
       id:1,
       title: 'RELATÓRIO ECONÔMICO, FINANCEIRO E PREVIDENCIÁRIO MARÇO DE 2024',
       date: '02/04/2024',
       description: 'O presente relatório tem como objetivo apresentar as informações da Gestão de Ativos e Passivos da PREVI e fluxo de caixa do primeiro trimestre de 2024, para apreciação da diretoria Executiva, Comitê de Investimento e pelo Conselho de Administração, e propostas a serem apresentas à Exma. Prefeita do município',
       doc:'/doc/noticias-comunicados-pdf/doc6586018181250.pdf',
     },
-    {
+    { //foi
       id:2,
       title: 'GESTÃO DE ATIVOS E PASSIVOS PREVIDENCIÁRIOS - RELATÓRIO ECONÔMICO E FINANCEIRO DEZEMBRO DE 2023',
       date: '24/01/2024',
@@ -85,14 +98,16 @@ export default function noticiasEcomunicados() {
       doc:'/doc/noticias-comunicados-pdf/doc3291135409242.pdf',
     },
   ];
+
+
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 8;
 
   // Cálculo de número total de páginas
-  const totalPages = Math.ceil(data.length / cardsPerPage);
+  const totalPages = Math.ceil(uploads.length / cardsPerPage);
 
   // Obtenção dos cards para a página atual
-  const currentCards = data.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage);
+  const currentCards = uploads.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage);
 
   // Mudar para a página anterior
   const handlePreviousPage = () => {
@@ -107,6 +122,37 @@ export default function noticiasEcomunicados() {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+
+  useEffect(() => {
+    const fetchUploads = async () => {
+      const querySnapshot = await getDocs(collection(db, 'news-noticiasComunicados'));
+      const uploadsData: Upload[] = [];
+      querySnapshot.forEach((doc) => {
+        const createdAtFormatted = doc.data().created_at
+        ? doc.data().created_at.toDate().toLocaleString('pt-BR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+          })
+        : 'Data não disponível';
+        uploadsData.push({ id: doc.id, ...doc.data() } as Upload);
+      });
+        // Ordenar pelo campo created_at
+     const sortedUploads = uploadsData.sort((a, b) => {
+      const dateA = a.created_at.toDate().getTime(); // Converter Timestamp para Date
+      const dateB = b.created_at.toDate().getTime(); // Converter Timestamp para Date
+      return dateA - dateB; // Ordena da mais antiga para a mais recente
+    });
+      setUploads(sortedUploads);
+      console.log(sortedUploads);
+    };
+    fetchUploads();
+
+  }, []);
+
   return (
     <>
     <div className={styles.containerCenter}>
@@ -121,7 +167,7 @@ export default function noticiasEcomunicados() {
               title={item.title}
               date={item.date}
               description={item.description}
-              doc={item.doc}
+              doc={item.fileUrl}
             />
           ))}
         </div>
