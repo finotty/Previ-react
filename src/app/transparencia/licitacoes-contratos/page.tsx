@@ -1,11 +1,21 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 import CardPDF from "@/app/components/cardPDF";
 import Pagination from "@/app/components/pagination";
+import { db} from '@/bd/firebaseConfig';
+import { Timestamp, collection, getDocs } from 'firebase/firestore';
 
+interface Upload {
+  id: string;
+  title: string;
+  description: string;
+  date: string;
+  fileUrl: string;
+  created_at:Timestamp;
+}
 export default function LicitacoesContratos() {
-
+  const [uploads, setUploads] = useState<Upload[]>([]);
   const data = [
     { 
       id:1,   
@@ -83,55 +93,55 @@ export default function LicitacoesContratos() {
     { 
       id:13,   
       docName:'Contrato de Serviços Atuariais',
-      doc:'/doc/licitacoes-contratos-pdf/.pdf',
+      doc:'/doc/licitacoes-contratos-pdf/5289.pdf',
       date:'2022'
     },
     { 
       id:14,   
       docName:'Contrato de Serviços Atuariais',
-      doc:'/doc/licitacoes-contratos-pdf/.pdf',
+      doc:'/doc/licitacoes-contratos-pdf/7417.pdf',
       date:'2020'
     },
     { 
       id:15,   
       docName:'Aditivo Sistema Contábil e Previdenciário',
-      doc:'/doc/licitacoes-contratos-pdf/.pdf',
+      doc:'/doc/licitacoes-contratos-pdf/3446.pdf',
       date:'2022'
     },
     { 
       id:16,   
       docName:'Aditivo Sistema Contábil e Previdenciário',
-      doc:'/doc/licitacoes-contratos-pdf/.pdf',
+      doc:'/doc/licitacoes-contratos-pdf/8962.pdf',
       date:'2021'
     },
     { 
       id:17,   
       docName:'Contrato Agenda Sistema Contábil e Previdenciário',
-      doc:'/doc/licitacoes-contratos-pdf/.pdf',
+      doc:'/doc/licitacoes-contratos-pdf/6444.pdf',
       date:'2019'
     },
     { 
       id:18,   
       docName:'Contrato Caixa Econômica Federal',
-      doc:'/doc/licitacoes-contratos-pdf/.pdf',
+      doc:'/doc/licitacoes-contratos-pdf/7177.pdf',
       date:'2021/2024'
     },
     { 
       id:19,   
       docName:'Edital de Credenciamento Instituições Financeiras',
-      doc:'/doc/licitacoes-contratos-pdf/.pdf',
+      doc:'/doc/licitacoes-contratos-pdf/0291.pdf',
       date:'2021/2024'
     },
-    { 
+    { //foi
       id:20,   
       docName:'Convênio Consignado Banco do Brasil',
-      doc:'/doc/licitacoes-contratos-pdf/.pdf',
+      doc:'/doc/licitacoes-contratos-pdf/1934.pdf',
       date:'2021/2024'
     },
-    { 
+    { //foi
       id:21,   
       docName:'Convênio Consignado Itau-Unibanco',
-      doc:'/doc/licitacoes-contratos-pdf/.pdf',
+      doc:'/doc/licitacoes-contratos-pdf/1035.pdf',
       date:'2021/2024'
     },
   
@@ -141,10 +151,10 @@ const [currentPage, setCurrentPage] = useState(1);
 const cardsPerPage = 14;
 
 // Cálculo de número total de páginas
-const totalPages = Math.ceil(data.length / cardsPerPage);
+const totalPages = Math.ceil(uploads.length / cardsPerPage);
 
 // Obtenção dos cards para a página atual
-const currentCards = data.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage);
+const currentCards = uploads.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage);
 
 // Mudar para a página anterior
 const handlePreviousPage = () => {
@@ -159,26 +169,48 @@ const handleNextPage = () => {
 const handlePageChange = (page: number) => {
   setCurrentPage(page);
 };
+useEffect(() => {
+  const fetchUploads = async () => {
+    const querySnapshot = await getDocs(collection(db, 'transparencia-licitacoesContratos'));
+    const uploadsData: Upload[] = [];
+    querySnapshot.forEach((doc) => {    
+      uploadsData.push({ id: doc.id, ...doc.data() } as Upload);
+    });
+      // Ordenar pelo campo created_at
+    const sortedUploads = uploadsData.sort((a, b) => {
+    const dateA = a.created_at.toDate().getTime(); // Converter Timestamp para Date
+    const dateB = b.created_at.toDate().getTime(); // Converter Timestamp para Date
+    return dateB - dateA; // Ordena da mais antiga para a mais recente
+  });
+    setUploads(sortedUploads);
+  };
+  fetchUploads();
+}, []);
   return (
     <>
     <div className={styles.containerCenter}>
         <h2>Licitações e Contratos</h2>      
         <p>Apresentação dos editais de licitações, dispensa e contratos em vigor</p>
          
-          <div className={styles.containerMidia}>
+          {uploads.length != 0 ? 
+          (<div className={styles.containerMidia}>
             {currentCards.map((item, index) => (
               <CardPDF               
                key={item.id} 
-               doc={item.doc}
-               docName={item.docName}
+               doc={item.fileUrl}
+               docName={item.title}
                date={item.date}
               />
             ))}
-          </div>
+          </div>):
+          (<div className={styles.loadingContainer}>
+           <div className={styles.spinner}></div>
+           <p>Carregando informações...</p>
+          </div>)}
       </div>
     
       {/* Paginação */}
-      { totalPages > 1  && (
+      { (totalPages > 1 && uploads.length != 0) && (
 
        <Pagination
           currentPage={currentPage}

@@ -1,11 +1,21 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import styles from "./styles.module.scss";
 import CardPDF from "@/app/components/cardPDF";
 import Pagination from "@/app/components/pagination";
+import { db} from '@/bd/firebaseConfig';
+import { Timestamp, collection, getDocs } from 'firebase/firestore';
 
+interface Upload {
+  id: string;
+  title: string;
+  description: string;
+  date: string;
+  fileUrl: string;
+  created_at:Timestamp;
+}
 export default function RelatoriosAplicacaoResgate() {
-
+  const [uploads, setUploads] = useState<Upload[]>([]);
   const data = [
     { 
       id:1,   
@@ -299,13 +309,13 @@ export default function RelatoriosAplicacaoResgate() {
       date:'APR 003/2021'
     },
     ////////////////////////////////////////////////////
-    { 
+    { //foi
       id:49,   
       docName:'Demonstrativo de Aplicação e Resgate',
       doc:'/doc/relatorios-resgate-aplicacao-pdf/doc9809735063114.pdf',
       date:'APR 002/2021'
     },
-    { 
+    { //foi
       id:50,   
       docName:'Demonstrativo de Aplicação e Resgate',
       doc:'/doc/relatorios-resgate-aplicacao-pdf/doc0186607378897.pdf',
@@ -317,10 +327,10 @@ const [currentPage, setCurrentPage] = useState(1);
 const cardsPerPage = 14;
 
 // Cálculo de número total de páginas
-const totalPages = Math.ceil(data.length / cardsPerPage);
+const totalPages = Math.ceil(uploads.length / cardsPerPage);
 
 // Obtenção dos cards para a página atual
-const currentCards = data.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage);
+const currentCards = uploads.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage);
 
 // Mudar para a página anterior
 const handlePreviousPage = () => {
@@ -335,26 +345,48 @@ const handleNextPage = () => {
 const handlePageChange = (page: number) => {
   setCurrentPage(page);
 };
+useEffect(() => {
+  const fetchUploads = async () => {
+    const querySnapshot = await getDocs(collection(db, 'transparencia-relatoriosAPK'));
+    const uploadsData: Upload[] = [];
+    querySnapshot.forEach((doc) => {    
+      uploadsData.push({ id: doc.id, ...doc.data() } as Upload);
+    });
+      // Ordenar pelo campo created_at
+    const sortedUploads = uploadsData.sort((a, b) => {
+    const dateA = a.created_at.toDate().getTime(); // Converter Timestamp para Date
+    const dateB = b.created_at.toDate().getTime(); // Converter Timestamp para Date
+    return dateB - dateA; // Ordena da mais antiga para a mais recente
+  });
+    setUploads(sortedUploads);
+  };
+  fetchUploads();
+}, []);
   return (
     <>
     <div className={styles.containerCenter}>
         <h2>Demonstrativo de Aplicação e Resgate</h2>      
         <p>Destinado a apresentar os demonstrativos de aplicações e resgates</p>
          
-          <div className={styles.containerMidia}>
+          {uploads.length != 0 ?
+          (<div className={styles.containerMidia}>
             {currentCards.map((item, index) => (
               <CardPDF               
                key={item.id} 
-               doc={item.doc}
-               docName={item.docName}
+               doc={item.fileUrl}
+               docName={item.title}
                date={item.date}
               />
             ))}
-          </div>
+          </div>):
+          (<div className={styles.loadingContainer}>
+           <div className={styles.spinner}></div>
+           <p>Carregando informações...</p>
+          </div>)}
       </div>
     
       {/* Paginação */}
-      { totalPages > 1  && (
+      { (totalPages > 1 && uploads.length != 0)  && (
 
       <Pagination
         currentPage={currentPage}

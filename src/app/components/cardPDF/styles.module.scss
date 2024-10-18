@@ -47,6 +47,10 @@
     p{
         font-size: 12px;
     }
+    button{
+      background: transparent;
+      border: 0;
+    }
 
     @media(max-width: 768px){
       flex: 1 1 calc(15% ); 

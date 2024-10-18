@@ -73,7 +73,7 @@ export default function UploadPage() {
     const docRef = await addDoc(collection(db, local), {
       title,
       description,
-      date,
+      date: (formData.sub === 'conselhoADM' || formData.sub === 'conselhoFiscal')? `ATA N° ${date}`: formData.sub === "relatoriosAPK" ? `APR ${date}`: date,
       fileUrl: `uploads/${file.name}`,
       created_at: Timestamp.now()
     })
@@ -156,9 +156,28 @@ export default function UploadPage() {
 
                 <input type='text' value={title} onChange={e => setTitle(e.target.value)} placeholder='Digite o titulo do documento' required/>
                 
-                <input type='date' value={date} onChange={e => setDate(e.target.value)} required/>
+                <input  value={date} onChange={e => setDate(e.target.value)} required 
+                placeholder={
+                  formData.sub === 'conselhoADM'?'Digite o numero da ATA':formData.sub === 'relatoriosAPK' ? 'Digite o número da APR/ano ex. 001/2024 ':''}
+                type={(
+                  formData.sub === 'conselhoADM' || 
+                  formData.sub === "conselhoFiscal"|| 
+                  formData.sub === "relatoriosContabeis"||
+                  formData.sub === "licitacoesContratos" ||
+                  formData.sub === "fundoPrevidenciario" ||
+                  formData.sub === "relatoriosAPK" ||
+                  formData.sub === "relatoriosPrevidenciarios" 
+                  )?'text':'date'} />
        
-                <textarea value={description} onChange={e => setDescription(e.target.value)} placeholder='Digite uma breve descrição sobre o conteúdo do documento'/>
+                <textarea  value={description} onChange={e => setDescription(e.target.value)} placeholder='Digite uma breve descrição sobre o conteúdo do documento'
+                 disabled={(
+                  formData.pagina === "governanca" || 
+                  formData.sub === "relatoriosContabeis" || 
+                  formData.sub === "licitacoesContratos" ||
+                  formData.sub === "fundoPrevidenciario" ||
+                  formData.sub === "relatoriosAPK" ||
+                  formData.sub === "relatoriosPrevidenciarios" 
+                  )? true : false}/>
     
                 <input type="file" accept="application/pdf" onChange={handleFileChange} required />      
               

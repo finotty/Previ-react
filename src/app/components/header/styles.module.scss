@@ -40,7 +40,6 @@
      @media (max-width: 768px){
        font-size: 16px;
      }
- 
   }
   .menuItemHome{
     width: 70px;
@@ -61,8 +60,7 @@
 
     @media(max-width: 768px){
       display: none;
-    }
-    
+    } 
   }
   .nav {
     margin-left: 20px;
@@ -74,22 +72,18 @@
     ul {
       display: flex;
       align-items: center;
-
     }
-
     li{
         &:hover{
             background-color: rgba(23, 104, 170, 0.411);
             border-radius: 6px;
         }
-
         @media (max-width: 768px) {
           width: 100%;
           padding: 10px;
           text-align: center;
         }
-    }
-    
+    }   
   }
   
   .menu {
@@ -102,10 +96,8 @@
       border: none;
       cursor: pointer;
       font-size: 18px;
-      color: var(--white);
-      
+      color: var(--white);     
     }
-
     @media (max-width: 768px){
       button{
         font-size: 14px;

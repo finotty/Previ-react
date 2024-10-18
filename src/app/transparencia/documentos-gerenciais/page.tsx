@@ -1,11 +1,21 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 import Card from "../../components/card";
 import Pagination from "@/app/components/pagination";
+import { db} from '@/bd/firebaseConfig';
+import { Timestamp, collection, getDocs } from 'firebase/firestore';
 
+interface Upload {
+  id: string;
+  title: string;
+  description: string;
+  date: string;
+  fileUrl: string;
+  created_at:Timestamp;
+}
 export default function DocumentosGerenciais() {
-//
+  const [uploads, setUploads] = useState<Upload[]>([]);
   const data = [
     {
       id:1,
@@ -91,7 +101,7 @@ export default function DocumentosGerenciais() {
       description: 'A GTF elaborou o presente relatório por solicitação do Município de JAPERÍ - RJ para prover às informações necessárias o Regime Próprio de Previdência do Município de JAPERÍ - RJ de acordo com as normas atuariais internacionalmente aceitas relacionadas aos compromissos para com o plano de benefício previsto na lei municipal e com base na legislação brasileira vigente.',
       doc:'/doc/documentos-gerenciais-pdf/doc4432676762292.pdf',
     },
-    {
+    {//foi
       id:13,
       title: 'POLÍTICA DE INVESTIMENTO PARA O EXERCÍCIO 2021',
       date: '06/06/2022',
@@ -105,10 +115,10 @@ export default function DocumentosGerenciais() {
   const cardsPerPage = 8;
 
   // Cálculo de número total de páginas
-  const totalPages = Math.ceil(data.length / cardsPerPage);
+  const totalPages = Math.ceil(uploads.length / cardsPerPage);
 
   // Obtenção dos cards para a página atual
-  const currentCards = data.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage);
+  const currentCards = uploads.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage);
 
   // Mudar para a página anterior
   const handlePreviousPage = () => {
@@ -122,9 +132,28 @@ export default function DocumentosGerenciais() {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+
+  useEffect(() => {
+    const fetchUploads = async () => {
+      const querySnapshot = await getDocs(collection(db, 'transparencia-documentosGerenciais'));
+      const uploadsData: Upload[] = [];
+      querySnapshot.forEach((doc) => {    
+        uploadsData.push({ id: doc.id, ...doc.data() } as Upload);
+      });
+        // Ordenar pelo campo created_at
+      const sortedUploads = uploadsData.sort((a, b) => {
+      const dateA = a.created_at.toDate().getTime(); // Converter Timestamp para Date
+      const dateB = b.created_at.toDate().getTime(); // Converter Timestamp para Date
+      return dateB - dateA; // Ordena da mais antiga para a mais recente
+    });
+      setUploads(sortedUploads);
+    };
+    fetchUploads();
+  }, []);
   return (
     <>
-    <div className={styles.containerCenter}>
+  {uploads.length != 0 ?
+  (  <div className={styles.containerCenter}>
       <h2>Documentos Gerenciais</h2>
       <p>Documentos e relatórios administrativos e de gestão previdenciária</p>
       
@@ -136,19 +165,24 @@ export default function DocumentosGerenciais() {
               title={item.title}
               date={item.date}
               description={item.description}
-              doc={item.doc}
+              doc={item.fileUrl}
             />
           ))}
         </div>
       {/* Paginação */}
-          <Pagination
+       {(totalPages > 1 && uploads.length != 0)  && 
+       (   <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
             onPreviousPage={handlePreviousPage}
             onNextPage={handleNextPage}
             onPageChange={handlePageChange}
-          />
-    </div>
+          />)}
+    </div>) :
+    (<div className={styles.loadingContainer}>
+     <div className={styles.spinner}></div>
+     <p>Carregando informações...</p>
+    </div>)}
   </>
   );
 }

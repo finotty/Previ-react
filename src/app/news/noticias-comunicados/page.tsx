@@ -3,10 +3,8 @@ import React, { useState,useEffect } from "react";
 import styles from "./styles.module.scss";
 import Card from "../../components/card";
 import Pagination from "@/app/components/pagination";
-import { db, storage} from '@/bd/firebaseConfig';
+import { db} from '@/bd/firebaseConfig';
 import { Timestamp, collection, getDocs } from 'firebase/firestore';
-import { ref, getDownloadURL } from 'firebase/storage';
-
 
 interface Upload {
   id: string;
@@ -20,14 +18,14 @@ interface Upload {
 export default function noticiasEcomunicados() {
   const [uploads, setUploads] = useState<Upload[]>([]);
   const data = [
-    {//foi
+    {
       id:1,
       title: 'RELATÓRIO ECONÔMICO, FINANCEIRO E PREVIDENCIÁRIO MARÇO DE 2024',
       date: '02/04/2024',
       description: 'O presente relatório tem como objetivo apresentar as informações da Gestão de Ativos e Passivos da PREVI e fluxo de caixa do primeiro trimestre de 2024, para apreciação da diretoria Executiva, Comitê de Investimento e pelo Conselho de Administração, e propostas a serem apresentas à Exma. Prefeita do município',
       doc:'/doc/noticias-comunicados-pdf/doc6586018181250.pdf',
     },
-    { //foi
+    { 
       id:2,
       title: 'GESTÃO DE ATIVOS E PASSIVOS PREVIDENCIÁRIOS - RELATÓRIO ECONÔMICO E FINANCEIRO DEZEMBRO DE 2023',
       date: '24/01/2024',
@@ -90,7 +88,7 @@ export default function noticiasEcomunicados() {
       description: 'O Instituto de Previdência dos Servidores Públicos do Município de Japeri (Previ-Japeri) conquistou, nesta terça-feira (25), o Certificado de Regularidade Previdenciária (CRP) administrativamente – documento que comprova que o Instituto segue normas de boa gestão e assegura o pagamento dos benefícios aos aposentados e pensionistas. Na Baixada Fluminense, apenas quatro municípios têm o CRP válido, sendo que três deles obtiveram a certificação judicialmente. Os outros seis não tem o documento.',
       doc:'/doc/noticias-comunicados-pdf/docInstituto-Previdência-conquista.pdf',
     },
-    {
+    {//foi
       id:11,
       title: 'SERVIDOR, QUAIS SÃO OS ATUAIS CRITÉRIOS QUE SÃO ADOTADOS PARA A SUA APOSENTADORIA',
       date: '06/06/2022',
@@ -98,7 +96,6 @@ export default function noticiasEcomunicados() {
       doc:'/doc/noticias-comunicados-pdf/doc3291135409242.pdf',
     },
   ];
-
 
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 8;
@@ -127,35 +124,24 @@ export default function noticiasEcomunicados() {
     const fetchUploads = async () => {
       const querySnapshot = await getDocs(collection(db, 'news-noticiasComunicados'));
       const uploadsData: Upload[] = [];
-      querySnapshot.forEach((doc) => {
-        const createdAtFormatted = doc.data().created_at
-        ? doc.data().created_at.toDate().toLocaleString('pt-BR', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-          })
-        : 'Data não disponível';
+      querySnapshot.forEach((doc) => {    
         uploadsData.push({ id: doc.id, ...doc.data() } as Upload);
       });
         // Ordenar pelo campo created_at
-     const sortedUploads = uploadsData.sort((a, b) => {
+      const sortedUploads = uploadsData.sort((a, b) => {
       const dateA = a.created_at.toDate().getTime(); // Converter Timestamp para Date
       const dateB = b.created_at.toDate().getTime(); // Converter Timestamp para Date
-      return dateA - dateB; // Ordena da mais antiga para a mais recente
+      return dateB - dateA; // Ordena da mais antiga para a mais recente
     });
       setUploads(sortedUploads);
-      console.log(sortedUploads);
     };
     fetchUploads();
-
   }, []);
 
   return (
     <>
-    <div className={styles.containerCenter}>
+ { uploads.length != 0 ?
+  ( <div className={styles.containerCenter}>
       <h2>Notícias e Comunicados</h2>
       <p>Notícias e comunicados de interesse dos servidores e da população</p>
       
@@ -172,15 +158,21 @@ export default function noticiasEcomunicados() {
           ))}
         </div>
       {/* Paginação */}       
-          <Pagination  
+       {(totalPages > 1 && uploads.length != 0)  && 
+       (   <Pagination  
             currentPage={currentPage}
             totalPages={totalPages}
             onPreviousPage={handlePreviousPage}
             onNextPage={handleNextPage}
             onPageChange={handlePageChange}
-          />
-                    
-    </div>
+          /> )}                
+    </div>)
+    :
+    (<div className={styles.loadingContainer}>
+    <div className={styles.spinner}></div>
+    <p>Carregando informações...</p>
+    </div>)
+  }
   </>
   );
 }

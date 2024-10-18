@@ -5,9 +5,7 @@ import logoImg from '../../../../public/logo.svg';
 import styles from './styles.module.scss';
 import Link from "next/link";
 
-export default function Header(){
-
-    
+export default function Header(){   
     // Estado que controla se a gaveta de "News" está aberta     
     const [activeMenu, setActiveMenu] = useState<string | null>(null)
     const [isMenuOpen, setIsMenuOpen] = useState(false); // Estado para o menu mobile
@@ -19,12 +17,6 @@ export default function Header(){
     const  handleToggleMenu = () => {
         setActiveMenu(null)
     }
-    const handleMobileMenu = () => {
-        setIsMenuOpen((prev) => !prev); // Abre ou fecha o menu mobile
-        setActiveMenu(null); // Fecha qualquer submenu ao abrir/fechar o menu mobile
-    };
-    
-
     return(
         <header className={styles.headerContainer}>
          <div className={styles.headerContent}>
@@ -39,11 +31,8 @@ export default function Header(){
               quality={100}
             />  
            </Link>
-       
-
         <nav className={styles.navMobile}>
-          <ul className={styles.menu}>
-            
+          <ul className={styles.menu}>         
              {/* Botão News */}
              <li className={styles.menuItemWithDropdown}>
                 <button onClick={() => toggleMenu('news')} className={styles.menuItem}>
@@ -314,8 +303,7 @@ export default function Header(){
                  </li>
                  {/* Botão Entrar */}
               
-            </ul>
-            
+            </ul>           
     </nav>
          </div>
             <div  className={styles.buttonLogin}>
