@@ -1,11 +1,20 @@
 "use client";
-import React from "react";
+import React,{useEffect,useState} from "react";
 import styles from "./page.module.scss";
 import Card from "./components/card";
-import Image from "next/image";
 import Link from "next/link";
-
+import { db} from '@/bd/firebaseConfig';
+import { Timestamp, collection, getDocs } from 'firebase/firestore';
+interface Upload {
+  id: string;
+  title: string;
+  description: string;
+  date: string;
+  fileUrl: string;
+  created_at:Timestamp;
+}
 export default function Home() {
+  const [uploads, setUploads] = useState<Upload[]>([]);
   const data = [
     {
       title: 'RELATÓRIO ECONÔMICO, FINANCEIRO E PREVIDENCIÁRIO MARÇO DE 2024',
@@ -33,6 +42,25 @@ export default function Home() {
     },
     
   ];
+
+  useEffect(() => {
+    const fetchUploads = async () => {
+      const querySnapshot = await getDocs(collection(db, 'news-noticiasComunicados'));
+      const uploadsData: Upload[] = [];
+      querySnapshot.forEach((doc) => {    
+        uploadsData.push({ id: doc.id, ...doc.data() } as Upload);
+      });
+        // Ordenar pelo campo created_at
+      const sortedUploads = uploadsData.sort((a, b) => {
+      const dateA = a.created_at.toDate().getTime(); // Converter Timestamp para Date
+      const dateB = b.created_at.toDate().getTime(); // Converter Timestamp para Date
+      return dateB - dateA; // Ordena da mais antiga para a mais recente
+    });
+      const firstObjects = sortedUploads.slice(0,4);
+      setUploads(firstObjects);
+    };
+    fetchUploads();
+  }, []);
   return (
     <>
       <div className={styles.containerCenter}>
@@ -41,17 +69,22 @@ export default function Home() {
         <div className={styles.divButton}>
            <Link className={styles.button} href="/news/noticias-comunicados">Ver mais</Link>
          </div>
-         <div className={styles.cardsContainer}>
-          {data.map((item, index) => (
+         {uploads.length != 0 ?
+         (<div className={styles.cardsContainer}>
+          {uploads.map((item, index) => (
            <Card 
             key={index} 
             title={item.title}
             date={item.date}
             description={item.description}
-            doc={item.doc}
+            doc={item.fileUrl}
           />
           ))}
-         </div>
+         </div>) :
+        (<div className={styles.loadingContainer}>
+        <div className={styles.spinner}></div>
+        <p>Carregando informações...</p>
+        </div>)}
 
       </div>
     </>

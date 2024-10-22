@@ -14,13 +14,17 @@ const Card = ({  doc,title, date, description }:any) => {
       window.open(url);
     });
   };
-
+  
+  const formatDate = (dateString: string) => {
+    const [year, month, day] = dateString.split("-");
+    return `${day}-${month}-${year}`;
+  };
     return (
       <div className={styles.cardContainer}>
         <div className={styles.cardContent}>
           <h3 className={styles.cardTitle}>{title}</h3>
           <div className={styles.divDate}>
-            <p className={styles.cardDate}>{date}</p>
+            <p className={styles.cardDate}>{formatDate(date)}</p>
           </div>
         <Image className={styles.cardImage} width={599} height={396} src={imagePDF} alt={title} quality={100} priority={true}/>
           <p className={styles.cardDescription}>{description.length > 150 ? description.substring(0, 150) + "..." : description}</p>

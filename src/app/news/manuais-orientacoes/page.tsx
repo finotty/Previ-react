@@ -75,7 +75,7 @@ useEffect(() => {
   };
   fetchUploads();
 }, []);
-  return (
+return (
     <>
     {uploads.length != 0 ?
      ( <div className={styles.containerCenter}>

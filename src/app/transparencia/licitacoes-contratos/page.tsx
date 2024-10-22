@@ -17,116 +17,116 @@ interface Upload {
 export default function LicitacoesContratos() {
   const [uploads, setUploads] = useState<Upload[]>([]);
   const data = [
-    { 
+    {//foi 
       id:1,   
       docName:'EDITAL DO CLUBE DE DESCONTO PREVI-JAPERI',
       doc:'/doc/licitacoes-contratos-pdf/doc4142373650273.pdf',
       date:'Clube de desconto PREVI-JAPERI'
     },
-    { 
+    {//foi 
       id:2,   
       docName:'Contrato de Sistema Integrado Previdenciário',
       doc:'/doc/licitacoes-contratos-pdf/doc8720234723593.pdf',
       date:'Exercício 2023'
     },
-    { 
+    {//foi 
       id:3,   
       docName:'Contrato de Consultoria Atuarial',
       doc:'/doc/licitacoes-contratos-pdf/doc1439949634808.pdf',
       date:'Exercício 2023'
     },
-    { 
+    {//foi 
       id:4,   
       docName:'Aditivo de Contrato de Custódia BB',
       doc:'/doc/licitacoes-contratos-pdf/doc6621522092840.pdf',
       date:'Custódia BB 2023'
     },
-    { 
+    {//foi 
       id:5,   
       docName:'Edital de Pregão Eletrônico',
       doc:'/doc/licitacoes-contratos-pdf/doc9644242027443.pdf',
       date:'SISTEMA DE GESTÃO PREVIDENCIÁRIA'
     },
-    { 
+    {//foi 
       id:6,   
       docName:'Edital de Dispensa de Licitação ',
       doc:'/doc/licitacoes-contratos-pdf/doc7747247574853.pdf',
       date:'CONSULTORIA E ASSESSORIA PREVIDENCIÁRIA E ATUARIAL'
     },
-    { 
+    {//foi 
       id:7,   
       docName:'Edital Dispensa de Licitação',
       doc:'/doc/licitacoes-contratos-pdf/doc6637949244225.pdf',
       date:'CURSO PREPARATÓRIO CERTIFICAÇÃO RPPS'
     },
-    { 
+    { //foi
       id:8,   
       docName:'Contrato Custódia Qualificada',
       doc:'/doc/licitacoes-contratos-pdf/doc4026862263658.pdf',
       date:'CAIXA ECONÔMICA FEDERAL'
     },
-    { 
+    {//foi 
       id:9,   
       docName:'Contrato Dataprev',
       doc:'/doc/licitacoes-contratos-pdf/doc0442549711976.pdf',
       date:'SISTEMA COMPREV'
     },
-    { 
+    {//foi 
       id:10,   
       docName:'Termo de Adesão Compensação Previdenciária',
       doc:'/doc/licitacoes-contratos-pdf/doc2462657969178.pdf',
       date:'COMPREV'
     },
-    { 
+    {//foi 
       id:11,   
       docName:'Contrato Custódia Qualificada',
       doc:'/doc/licitacoes-contratos-pdf/doc4639543894915.pdf',
       date:'BANCO DO BRASIL'
     },
-    { 
+    {//foi 
       id:12,   
       docName:'Contrato Crédito e Mercado',
       doc:'/doc/licitacoes-contratos-pdf/doc0112023509191.pdf',
       date:'2022'
     },
     //////////////////////////////////////////////////
-    { 
+    {//foi 
       id:13,   
       docName:'Contrato de Serviços Atuariais',
       doc:'/doc/licitacoes-contratos-pdf/5289.pdf',
       date:'2022'
     },
-    { 
+    {//foi 
       id:14,   
       docName:'Contrato de Serviços Atuariais',
       doc:'/doc/licitacoes-contratos-pdf/7417.pdf',
       date:'2020'
     },
-    { 
+    {//foi 
       id:15,   
       docName:'Aditivo Sistema Contábil e Previdenciário',
       doc:'/doc/licitacoes-contratos-pdf/3446.pdf',
       date:'2022'
     },
-    { 
+    {//foi 
       id:16,   
       docName:'Aditivo Sistema Contábil e Previdenciário',
       doc:'/doc/licitacoes-contratos-pdf/8962.pdf',
       date:'2021'
     },
-    { 
+    {//foi 
       id:17,   
       docName:'Contrato Agenda Sistema Contábil e Previdenciário',
       doc:'/doc/licitacoes-contratos-pdf/6444.pdf',
       date:'2019'
     },
-    { 
+    {//foi 
       id:18,   
       docName:'Contrato Caixa Econômica Federal',
       doc:'/doc/licitacoes-contratos-pdf/7177.pdf',
       date:'2021/2024'
     },
-    { 
+    {//foi 
       id:19,   
       docName:'Edital de Credenciamento Instituições Financeiras',
       doc:'/doc/licitacoes-contratos-pdf/0291.pdf',

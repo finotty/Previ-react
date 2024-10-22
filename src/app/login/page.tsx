@@ -20,6 +20,7 @@ export default function Login(){
 
    // Função para navegar para a página /admin
    const handleLogin = () => {
+    setIsloading(true);
       if(!email || !password){
       setIsloading(false)
       return alert('Informe Usuario e Senha!');
@@ -52,7 +53,7 @@ export default function Login(){
       })
         
      setIsloading(true);
-    //router.push('/admin'); 
+    
   };
     return(
         <>
@@ -73,8 +74,8 @@ export default function Login(){
                             {showPassword ? <FaEyeSlash /> : <FaEye />} {/* Ícone que alterna */}
                             </span>
                     </div>
-                    <button onClick={handleLogin}>
-                        Entrar
+                    <button onClick={handleLogin} disabled={isLoading}>
+                    {isLoading ? 'Validando...' : 'Entrar'}
                     </button>
                 </div>
             </div>

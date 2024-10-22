@@ -4,26 +4,23 @@ import styles from './styles.module.scss';
 import { app, db, storage } from '@/bd/firebaseConfig';
 import { collection, addDoc,Timestamp  } from 'firebase/firestore';
 import { ref, uploadBytes } from 'firebase/storage';
-import { getAuth , onAuthStateChanged, Auth} from "firebase/auth";
+import { getAuth , onAuthStateChanged} from "firebase/auth";
 export default function UploadPage() {
-  const [formData, setFormData] = useState({
-    pagina:"",
-    sub:"",
-  });
+  const [formData, setFormData] = useState({pagina:"",sub:""});
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
   const [file, setFile] = useState<File | null>(null);
-
   const [isloading, setIsloading] = useState(true);
-  const [user, setUser ]= useState<any>();
+  const [isSubmitting, setIsSubmitting] = useState(false); 
+ // const [user, setUser ]= useState<any>();
   const auth = getAuth(app);
   // Definindo as opções com base na página selecionada
   const optionsMap: Record<string, { value: string; label: string }[]> = {
     news: [
       { value: 'noticiasComunicados', label: 'Notícias e Comunicados' },
       { value: 'manuaisOrientacoes', label: 'Manuais e Orientações' },
-      { value: 'fotosVideos', label: 'Fotos e Videos' },
+      //{ value: 'fotosVideos', label: 'Fotos e Videos' },
     ],
     governanca: [
       { value: 'diretoriaExecutiva', label: 'Diretoria Executiva' },
@@ -56,34 +53,61 @@ export default function UploadPage() {
     }
   };
 
+    // Determine placeholder text and input type for the date field
+  const datePlaceholder = formData.sub === 'conselhoADM' ? 'Digite o número da ATA' : formData.sub === 'relatoriosAPK' ? 'Digite o número da APR/ano ex. 001/2024' : formData.sub === 'conselhoFiscal' ? 'Digite o número da ATA' :'';
+  const inputType = (
+      formData.sub === 'conselhoADM' || 
+      formData.sub === 'conselhoFiscal' || 
+      formData.sub === 'relatoriosContabeis' ||
+      formData.sub === 'licitacoesContratos' ||
+      formData.sub === 'fundoPrevidenciario' ||
+      formData.sub === 'relatoriosAPK' ||
+      formData.sub === 'relatoriosPrevidenciarios'||
+      formData.sub === 'diretoriaExecutiva' ||
+      formData.sub === 'comiteInvestimentos'
+    ) ? 'text' : 'date';
+
+   // Conditional disabling of the textarea field
+  const isDescriptionDisabled = (
+  formData.pagina === 'governanca' || 
+  formData.sub === 'relatoriosContabeis' || 
+  formData.sub === 'licitacoesContratos' || 
+  formData.sub === 'fundoPrevidenciario' || 
+  formData.sub === 'relatoriosAPK' || 
+  formData.sub === 'relatoriosPrevidenciarios'
+  );
 
   const handleSubmit = async (e: React.FormEvent)=> {
     e.preventDefault();
     if (!file) return;
 
+    setIsSubmitting(true); // Disable the button and show loading
+    
+    try {
+      // Upload the file to Firebase Storage
+      const fileRef = ref(storage, `uploads/${file.name}`);
+      await uploadBytes(fileRef, file);
 
-    // Salva o arquivo no Storage
-    const fileRef = ref(storage, `uploads/${file.name}`);
-    await uploadBytes(fileRef, file);
+      // Save the information to Firestore
+      const local = `${formData.pagina}-${formData.sub}`;
+      await addDoc(collection(db, local), {
+        title,
+        description,
+        date: formData.sub === 'conselhoADM' ? `ATA N° ${date}` : formData.sub === 'relatoriosAPK' ? `APR ${date}` : date,
+        fileUrl: `uploads/${file.name}`,
+        created_at: Timestamp.now()
+      });
 
-
-    // Salva as informações no Firestore
-    const local = `${formData.pagina}-${formData.sub}`;
-
-    const docRef = await addDoc(collection(db, local), {
-      title,
-      description,
-      date: (formData.sub === 'conselhoADM' || formData.sub === 'conselhoFiscal')? `ATA N° ${date}`: formData.sub === "relatoriosAPK" ? `APR ${date}`: date,
-      fileUrl: `uploads/${file.name}`,
-      created_at: Timestamp.now()
-    })
-   
-    console.log('Documento escrito com ID: ', docRef.id);
-    setTitle('');
-    setDescription('');
-    setDate('');
-    setFile(null);
-
+      // Reset form fields after successful submission
+      setTitle('');
+      setDescription('');
+      setDate('');
+      setFile(null);
+    } catch (error) {
+      console.error("Error uploading document: ", error);
+    } finally {
+      setIsSubmitting(false); // Re-enable the button after submission
+    }
   };
 
   useEffect(() => {
@@ -95,101 +119,105 @@ export default function UploadPage() {
        
 },[])
   return (
-    <>{ isloading ? (
+    <>{isloading ? (
       <div className={styles.loadingContainer}>
         <div className={styles.spinner}></div>
         <p>Carregando informações...</p>
       </div>
-    ) :
-    <div className={styles.container}>
-       <div className={styles.content}>
-        <div className={styles.divForm}>
-          <h1>Adicionar documento no site</h1>
-          <h5>*Preencha todos os campos*</h5>
-           <form onSubmit={handleSubmit}>
-            <div className={styles.divFormIn}>
-              <div className={styles.divLabel}>
-                <label className={styles.labelPage}>Pagina:</label>
-              
-                <label>Titulo:</label>
-                <label className={styles.labelDate}>Data do arquivo:</label>
-                <label>Descrição:</label>
-                <label className={styles.labelPDF}>Arquivo PDF:</label>
-              </div>
+    ) : (
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <div className={styles.divForm}>
+            <h1>Adicionar documento no site</h1>
+            <h5>*Preencha todos os campos*</h5>
+            <form onSubmit={handleSubmit}>
+              <div className={styles.divFormIn}>
+                <div className={styles.divLabel}>
+                  <label className={styles.labelPage}>Pagina:</label>
+                  <label>Titulo:</label>
+                  <label className={styles.labelDate}>Data do arquivo:</label>
+                  <label>Descrição:</label>
+                  <label className={styles.labelPDF}>Arquivo PDF:</label>
+                </div>
 
-              <div className={styles.divInputs}>
+                <div className={styles.divInputs}>
+                  <div className={styles.divSelect}>
+                    <select
+                      id="pagina"
+                      name="pagina"
+                      value={formData.pagina}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">Selecione uma página</option>
+                      {/*<option value="home">Home</option>*/}
+                      <option value="news">News</option>
+                      <option value="governanca">Governança</option>
+                      <option value="transparencia">Transparência</option>
+                    </select>
 
-              <div className={styles.divSelect}>
-                <select
-                  id="pagina"
-                  name="pagina"
-                  value={formData.pagina}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="">Selecione uma pagina</option>
-                  <option value="home">Home</option>
-                  <option value="news">News</option>
-                  <option value="governanca">Governança</option>
-                  <option value="transparencia">Transparencia</option>
-                </select>
+                    <label className={styles.labelSub}>Sub:</label>
+                    <select
+                      id="sub"
+                      name="sub"
+                      value={formData.sub}
+                      onChange={handleChange}
+                      disabled={!formData.pagina || formData.pagina === 'home'}
+                      required
+                    >
+                      <option value="">Selecione uma opção</option>
+                      {formData.pagina && optionsMap[formData.pagina]?.map(option => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
 
-                <label className={styles.labelSub}>Sub:</label>
-                <select
-                  id="sub"
-                  name="sub"
-                  value={formData.sub}
-                  onChange={handleChange}
-                  disabled={(formData.pagina === '' || formData.pagina === "home")? true : false}
-                  required
-                >
-                  <option value="">Selecione uma opção</option>
-                  
-                  {formData.pagina &&
-                  optionsMap[formData.pagina]?.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))} 
-                </select>
-              </div>
+                  <input
+                    type="text"
+                    value={title}
+                    onChange={e => setTitle(e.target.value)}
+                    placeholder="Digite o título do documento"
+                    required
+                  />
 
-                <input type='text' value={title} onChange={e => setTitle(e.target.value)} placeholder='Digite o titulo do documento' required/>
-                
-                <input  value={date} onChange={e => setDate(e.target.value)} required 
-                placeholder={
-                  formData.sub === 'conselhoADM'?'Digite o numero da ATA':formData.sub === 'relatoriosAPK' ? 'Digite o número da APR/ano ex. 001/2024 ':''}
-                type={(
-                  formData.sub === 'conselhoADM' || 
-                  formData.sub === "conselhoFiscal"|| 
-                  formData.sub === "relatoriosContabeis"||
-                  formData.sub === "licitacoesContratos" ||
-                  formData.sub === "fundoPrevidenciario" ||
-                  formData.sub === "relatoriosAPK" ||
-                  formData.sub === "relatoriosPrevidenciarios" 
-                  )?'text':'date'} />
-       
-                <textarea  value={description} onChange={e => setDescription(e.target.value)} placeholder='Digite uma breve descrição sobre o conteúdo do documento'
-                 disabled={(
-                  formData.pagina === "governanca" || 
-                  formData.sub === "relatoriosContabeis" || 
-                  formData.sub === "licitacoesContratos" ||
-                  formData.sub === "fundoPrevidenciario" ||
-                  formData.sub === "relatoriosAPK" ||
-                  formData.sub === "relatoriosPrevidenciarios" 
-                  )? true : false}/>
-    
-                <input type="file" accept="application/pdf" onChange={handleFileChange} required />      
-              
-              <button type='submit' className={styles.buttonSend}>Enviar</button>
+                  <input
+                    value={date}
+                    onChange={e => setDate(e.target.value)}
+                    required
+                    placeholder={datePlaceholder}
+                    type={inputType}
+                  />
+
+                  <textarea
+                    value={description}
+                    onChange={e => setDescription(e.target.value)}
+                    placeholder="Digite uma breve descrição sobre o conteúdo do documento"
+                    disabled={isDescriptionDisabled}
+                  />
+
+                  <input
+                    type="file"
+                    accept="application/pdf"
+                    onChange={handleFileChange}
+                    required
+                  />
+
+                  <button
+                    type="submit"
+                    className={styles.buttonSend}
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'Enviando...' : 'Enviar'}
+                  </button>
+                </div>
               </div>
-              </div>
-           </form>
+            </form>
+          </div>
         </div>
-       </div>
-    </div>
-   
-  }
+      </div>
+    )}
     </>
   );
 }
