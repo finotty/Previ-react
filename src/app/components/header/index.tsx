@@ -51,11 +51,7 @@ export default function Header(){
                              Manuais e Orientações
                             </Link>
                         </li>
-                        <li>
-                            <Link className={styles.dropdownItem} href="/news/fotos-videos" onClick={handleToggleMenu} passHref>
-                             Fotos e vídeos
-                            </Link>
-                        </li>
+                     
                         </ul>
                     )}
                 </li>
