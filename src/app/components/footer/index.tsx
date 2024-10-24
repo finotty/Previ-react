@@ -2,9 +2,9 @@ import React from 'react';
 import Link from 'next/link';
 import styles from './styles.module.scss'; 
 import Image from 'next/image';
-import logo from '../../../public/logo.svg';
-import fb from '../../..//public/fb-icon.svg';
-import japeri from '../../../public/japeri.svg';
+import logo from '../../../../public/logo.svg';
+import fb from '../../../../public/fb-icon.svg';
+import japeri from '../../../../public/japeri.svg';
 
 export default function Footer() {
   return (

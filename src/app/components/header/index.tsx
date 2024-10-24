@@ -1,7 +1,7 @@
 "use client";
 import { useState } from 'react';
 import Image from "next/image";
-import logoImg from '../../../public/logo.svg';
+import logoImg from '../../../../public/logo.svg';
 import styles from './styles.module.scss';
 import Link from "next/link";
 
@@ -186,11 +186,6 @@ export default function Header(){
                         <li>
                             <Link className={styles.dropdownItem} href="/news/manuais-orientacoes" onClick={handleToggleMenu} passHref>
                              Manuais e Orientações
-                            </Link>
-                        </li>
-                        <li>
-                            <Link className={styles.dropdownItem} href="/news/fotos-videos" onClick={handleToggleMenu} passHref>
-                             Fotos e vídeos
                             </Link>
                         </li>
                         </ul>

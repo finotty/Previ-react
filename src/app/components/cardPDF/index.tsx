@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./styles.module.scss"
 import Image from "next/image";
 import imgPDF from "../../../assets/IMG-pdf.png";
-import Link from "next/link";
 import { storage } from "@/bd/firebaseConfig";
 import { ref, getDownloadURL } from 'firebase/storage';
 

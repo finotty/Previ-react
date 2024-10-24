@@ -1,7 +1,7 @@
 import Image from "next/image";
 import imag from "../../../assets/background.png";
-import imageBrasao from "../../../public/brasao.svg"
-import logo from "../../../public/logo.svg";
+import imageBrasao from "../../../../public/brasao.svg"
+import logo from "../../../../public/logo.svg";
 import styles from './styles.module.scss';
 
 export default function ImageContainer(){
