@@ -4,6 +4,7 @@ import "./globals.scss";
 import Header from "./components/header";
 import ImageContainer from "./components/imageContainer";
 import Footer from "./components/footer";
+import Home from "./page";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,7 +32,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Header />
         <ImageContainer/>
-        {children}
+        {children || <Home/>}
         <Footer/>
       </body>
     </html>
