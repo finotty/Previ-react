@@ -270,6 +270,33 @@ export default function Header(){
                         </ul>
                     )}
                 </li>
+                        {/* Botão Institucional */}
+                        <li className={styles.menuItemWithDropdown}>
+                <button onClick={() => toggleMenu('inst')} className={styles.menuItem}>
+                    Institucional
+                </button>
+                {/* Gaveta com opções */}
+                    {activeMenu === 'inst' && (
+                        <ul className={styles.dropdownMenu}>
+                        <li>
+                            <Link className={styles.dropdownItem}  href="/institucional/sobre" onClick={handleToggleMenu} passHref>
+                             Sobre o Instituto
+                            </Link>
+                        </li>
+                        <li>
+                            <Link className={styles.dropdownItem}  href="/institucional/organograma" onClick={handleToggleMenu} passHref>
+                             Organograma
+                            </Link>
+                        </li>
+                        <li>
+                            <Link className={styles.dropdownItem}  href="/institucional/diretoria-executiva" onClick={handleToggleMenu} passHref>
+                             Diretoria Executiva
+                            </Link>
+                        </li>
+                        
+                        </ul>
+                    )}
+                </li>
                  {/* Botão Fale-conosco */}
                  <li className={styles.menuItemWithDropdown}>
                 <button onClick={() => toggleMenu('fale')} className={styles.menuItem}>

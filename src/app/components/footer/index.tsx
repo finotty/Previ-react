@@ -25,6 +25,13 @@ export default function Footer() {
 
         {/* Direitos autorais */}
         <div className={styles.copyright}>
+              <Image className={styles.imgJaperi}
+                src={japeri}
+                alt=''
+                width={50}
+                height={50} 
+              /> 
+          <p>Prefeitura de Japeri: Estrada São Pedro, 987 - Teófilo Cunha - 26443-210</p>
           <p>&copy; {new Date().getFullYear()} Previ Japeri. Todos os direitos reservados.</p>
         </div>
         {/* Seção de redes sociais */}
@@ -39,12 +46,6 @@ export default function Footer() {
                 />
               </Link>
          
-              <Image className={styles.imgJaperi}
-                src={japeri}
-                alt=''
-                width={50}
-                height={50} 
-              /> 
         </div>
       </div>
     </footer>
