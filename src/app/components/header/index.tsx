@@ -4,6 +4,7 @@ import Image from "next/image";
 import logoImg from '../../../../public/logo.svg';
 import styles from './styles.module.scss';
 import Link from "next/link";
+import foneIMG from '../../../../public/fones-de-ouvido.png';
 
 export default function Header(){   
     // Estado que controla se a gaveta de "News" está aberta     
@@ -20,6 +21,8 @@ export default function Header(){
     return(
         <header className={styles.headerContainer}>
          <div className={styles.headerContent}>
+            <div className={styles.divLogo}>
+
            <Link  href="/" >
             <Image
               className={styles.logo}
@@ -31,6 +34,37 @@ export default function Header(){
               quality={100}
             />  
            </Link>
+           <ul className={styles.ulFaleConoscoMobile}>
+             {/* Botão Fale-conosco */}
+             <li className={styles.menuItemWithDropdown}>
+                <button onClick={() => toggleMenu('fale')} className={styles.menuItem}>
+                    <Image
+                    className={styles.foneIMG}
+                     src={foneIMG}
+                     alt=''
+                     width={25}
+                     height={25}
+                    />
+                </button>
+                {/* Gaveta com opções */}
+                    {activeMenu === 'fale' && (
+                        <ul className={styles.dropdownMenuFale}>
+                        <li>
+                            <Link className={styles.dropdownItem}  href="/fale-conosco/contato" onClick={handleToggleMenu} passHref>
+                             Contatos
+                            </Link>
+                        </li>
+                        <li>
+                            <Link className={styles.dropdownItem}  href="/Home" onClick={handleToggleMenu} passHref>
+                             Nossa página no Facebook
+                            </Link>
+                        </li>
+                     
+                        </ul>
+                    )}
+             </li>
+           </ul>
+            </div>
         <nav className={styles.navMobile}>
           <ul className={styles.menu}>         
              {/* Botão News */}
@@ -90,7 +124,7 @@ export default function Header(){
              {/* Botão Transparencia */}
              <li className={styles.menuItemWithDropdown}>
                 <button onClick={() => toggleMenu('transp')} className={styles.menuItem}>
-                    Transparencia
+                    Transparência
                 </button>
                 {/* Gaveta com opções */}
                     {activeMenu === 'transp' && (
@@ -133,29 +167,33 @@ export default function Header(){
                         </ul>
                     )}
              </li>
-
-             {/* Botão Fale-conosco */}
+             {/* Botão Institucional */}
              <li className={styles.menuItemWithDropdown}>
-                <button onClick={() => toggleMenu('fale')} className={styles.menuItem}>
-                    Fale Conosco
+                <button onClick={() => toggleMenu('inst')} className={styles.menuItem}>
+                    Institucional
                 </button>
                 {/* Gaveta com opções */}
-                    {activeMenu === 'fale' && (
-                        <ul className={styles.dropdownMenuFale}>
+                    {activeMenu === 'inst' && (
+                        <ul className={styles.dropdownMenuInst}>
                         <li>
-                            <Link className={styles.dropdownItem}  href="/fale-conosco/contato" onClick={handleToggleMenu} passHref>
-                             Contatos
+                            <Link className={styles.dropdownItem}  href="/institucional/sobre" onClick={handleToggleMenu} passHref>
+                             Sobre o Instituto
                             </Link>
                         </li>
                         <li>
-                            <Link className={styles.dropdownItem}  href="/Home" onClick={handleToggleMenu} passHref>
-                             Nossa página no Facebook
+                            <Link className={styles.dropdownItem}  href="/institucional/organograma" onClick={handleToggleMenu} passHref>
+                             Organograma
                             </Link>
                         </li>
-                     
+                        <li>
+                            <Link className={styles.dropdownItem}  href="/institucional/diretoria-executiva" onClick={handleToggleMenu} passHref>
+                             Diretoria Executiva
+                            </Link>
+                        </li>
+                        
                         </ul>
                     )}
-             </li>
+                </li>
           </ul>
         </nav>
 
@@ -186,6 +224,11 @@ export default function Header(){
                         <li>
                             <Link className={styles.dropdownItem} href="/news/manuais-orientacoes" onClick={handleToggleMenu} passHref>
                              Manuais e Orientações
+                            </Link>
+                        </li>
+                        <li>
+                            <Link className={styles.dropdownItem} href="/news/certificados-CRP" onClick={handleToggleMenu} passHref>
+                             Informações sobre CRP
                             </Link>
                         </li>
                         </ul>
@@ -227,7 +270,7 @@ export default function Header(){
                 {/* Botão Transparencia */}
                 <li className={styles.menuItemWithDropdown}>
                 <button onClick={() => toggleMenu('transp')} className={styles.menuItem}>
-                    Transparencia
+                    Transparência
                 </button>
                 {/* Gaveta com opções */}
                     {activeMenu === 'transp' && (

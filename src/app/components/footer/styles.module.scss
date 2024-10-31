@@ -26,9 +26,10 @@
     width: 180px;
     display: flex;
     align-items: center;
-    justify-content: space-between;  
+    justify-content: flex-end;  
     @media (max-width: 768px) {
       justify-content: center;
+      display: none;
      }
     
   }

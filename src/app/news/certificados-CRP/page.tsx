@@ -14,8 +14,8 @@ interface Upload {
   fileUrl: string;
   created_at:Timestamp;
 }
-export default function RelatoriosPrevidenciarios() {
-const [uploads, setUploads] = useState<Upload[]>([]);
+export default function CRP() {
+const [uploads, setUploads] = useState<Upload[]>([]);  
 const [currentPage, setCurrentPage] = useState(1);
 const cardsPerPage = 14;
 
@@ -33,13 +33,14 @@ const handlePreviousPage = () => {
 // Mudar para a próxima página
 const handleNextPage = () => {
   if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  
 };
 const handlePageChange = (page: number) => {
   setCurrentPage(page);
 };
 useEffect(() => {
   const fetchUploads = async () => {
-    const querySnapshot = await getDocs(collection(db, 'transparencia-relatoriosPrevidenciarios'));
+    const querySnapshot = await getDocs(collection(db, 'news-CRP'));
     const uploadsData: Upload[] = [];
     querySnapshot.forEach((doc) => {    
       uploadsData.push({ id: doc.id, ...doc.data() } as Upload);
@@ -55,13 +56,12 @@ useEffect(() => {
   fetchUploads();
 }, []);
   return (
-    <>
+    <>{ uploads.length != 0 ? (
     <div className={styles.containerCenter}>
-        <h2>Relatórios Previdenciários</h2>      
-        <p>DIPR - Demonstrativos de informações previdenciários e repasses [CadPrev]</p>
+        <h2>Certificados CRP</h2>      
+        
          
-         {uploads.length != 0 ?
-         ( <div className={styles.containerMidia}>
+          <div className={styles.containerMidia}>
             {currentCards.map((item, index) => (
               <CardPDF               
                key={item.id} 
@@ -70,16 +70,17 @@ useEffect(() => {
                date={item.date}
               />
             ))}
-          </div>):
-          (<div className={styles.loadingContainer}>
-           <div className={styles.spinner}></div>
-           <p>Carregando informações...</p>
-          </div>)}
+          </div>
       </div>
+      )  :
+      (<div className={styles.loadingContainer}>
+      <div className={styles.spinner}></div>
+      <p>Carregando informações...</p>
+      </div>)}
     
         {/* Paginação */}
         { (totalPages > 1 && uploads.length != 0)  && (
-
+   
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}

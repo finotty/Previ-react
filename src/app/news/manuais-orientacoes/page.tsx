@@ -16,26 +16,7 @@ interface Upload {
 }
 
 export default function ManuaisOrientacoes() {
-  const [uploads, setUploads] = useState<Upload[]>([]);
-  const data = [
-    {//10:41:21
-      id: 1,
-      title: 'MANUAL DE PROCEDIMENTOS DE ENVIO DE FOLHA DE PAGAMENTO - TCE-RJ',
-      date: '18/08/2023',
-      description: 'Este manual do Módulo de Folha de Pagamento do Sistema e-TCERJ descreve os procedimentos a serem ad...',
-      doc:'/doc/manuais-orientacoes-pdf/doc9417384887116.pdf',
-    },
-    {//10:40:35
-      id: 2,
-      title: 'SERVIDOR, QUAIS SÃO OS ATUAIS CRITÉRIOS QUE SÃO ADOTADOS PARA A SUA APOSENTADORIA?',
-      date: '25/07/2022',
-      description: 'Nesta semana tivemos a satisfação de presenciar a concessão da aposentadoria da servidora Valéri...',
-      doc:'/doc/manuais-orientacoes-pdf/doc5104222917594.pdf',
-    },
-    
-  
-];
-
+const [uploads, setUploads] = useState<Upload[]>([]);
 const [currentPage, setCurrentPage] = useState(1);
 const cardsPerPage = 8;
 

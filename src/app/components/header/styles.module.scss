@@ -23,6 +23,14 @@
       margin-top: -10px;
     }
   }
+  .divLogo{
+    width: 340px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  
+  }
   .logo {
     width: 180px; /* Ajustar largura da logo */
     height: auto;
@@ -31,6 +39,17 @@
       width: 130px; /* Reduzir tamanho da logo em telas menores */
 
     }
+  }
+
+
+  .ulFaleConoscoMobile{
+    display: none;
+    
+    @media (max-width: 768px) {
+      display: flex;
+      
+    }
+
   }
   .homeButton{
     font-size: 21px;
@@ -143,6 +162,7 @@
   .menuItemWithDropdown {
     position: relative;
   }
+ 
   
   .dropdownMenu {
     position: absolute; 
@@ -169,7 +189,7 @@
     }
     
   }
-  .dropdownMenuFale{
+  .dropdownMenuInst{
     position: absolute; 
     top: calc(100% + 5px); 
     display: flex;
@@ -185,8 +205,35 @@
     list-style: none;
 
     @media (max-width: 768px) {
+      width: 180px;
+      left:-110px;
+    }
+
+    li{
+        width: 100%;      
+    }
+    
+  }
+  .dropdownMenuFale{
+    position: absolute; 
+    top: calc(100% + 5px); 
+    display: flex;
+    left: 0;
+    background-color: var(--white);
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    z-index: 1001;
+    width: 300px;
+    flex-direction: column;
+    list-style: none;
+    
+
+    @media (max-width: 768px) {
       width: 130px;
-      left: -50px;  
+      left: -100px;  
+      top:30px;
     }
 
     li{

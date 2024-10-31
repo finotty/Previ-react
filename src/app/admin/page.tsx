@@ -5,6 +5,7 @@ import { app, db, storage } from '@/bd/firebaseConfig';
 import { collection, addDoc,Timestamp  } from 'firebase/firestore';
 import { ref, uploadBytes } from 'firebase/storage';
 import { getAuth , onAuthStateChanged} from "firebase/auth";
+
 export default function UploadPage() {
   const [formData, setFormData] = useState({pagina:"",sub:""});
   const [title, setTitle] = useState('');
@@ -20,7 +21,7 @@ export default function UploadPage() {
     news: [
       { value: 'noticiasComunicados', label: 'Notícias e Comunicados' },
       { value: 'manuaisOrientacoes', label: 'Manuais e Orientações' },
-      //{ value: 'fotosVideos', label: 'Fotos e Videos' },
+      { value: 'CRP', label: 'Informações sobre CRP' },
     ],
     governanca: [
       { value: 'diretoriaExecutiva', label: 'Diretoria Executiva' },
@@ -74,7 +75,8 @@ export default function UploadPage() {
   formData.sub === 'licitacoesContratos' || 
   formData.sub === 'fundoPrevidenciario' || 
   formData.sub === 'relatoriosAPK' || 
-  formData.sub === 'relatoriosPrevidenciarios'
+  formData.sub === 'relatoriosPrevidenciarios' ||
+  formData.sub === 'CRP'
   );
 
   const handleSubmit = async (e: React.FormEvent)=> {

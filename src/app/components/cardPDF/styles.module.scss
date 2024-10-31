@@ -1,11 +1,13 @@
 .cardContainer {
-    width: 180px;
-    min-height: 200px;
+    max-width: 170px;
+    min-width: 100px;
+    max-height: 200px;
+    min-height: 150px;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 10px;
-    padding: 16px;
+    padding: 1px;
     transition: 0.3s;
     text-align: center;
     display: flex;
@@ -14,8 +16,8 @@
     border:1px solid #c4c2c2e3;
     cursor: pointer;
     @media (max-width: 768px) {
-        width: 40%;
-        min-height: 100px;
+       width: 50px;
+       min-height: 100px;
       }
   
     &:hover {
@@ -37,105 +39,40 @@
   .cardContent {
     flex: 1 1 calc(25% ); 
     max-width: calc(25% ); 
-    min-width: 170px;          
+    min-width: 140px;            
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Espaça os elementos verticalmente */
+    align-items: center; /* Centraliza os itens no eixo horizontal */
     h3{
-        font-size: 16px;
+        font-size: 14px;
         margin-bottom: 5px;
         text-align: center;
+        text-transform: uppercase;
     }
     p{
-        font-size: 12px;
+        font-size: 10px;
+        margin-top: auto; /* Garante que o <p> esteja no final */
+        text-transform: uppercase;
     }
     button{
       background: transparent;
       border: 0;
+      
     }
 
     @media(max-width: 768px){
       flex: 1 1 calc(15% ); 
       max-width: calc(15% ); 
-      min-width: 150px;
+      min-width: 80px;
       h3{
-        font-size: 12px;
+        font-size: 10px;
       }
       p{
-        font-size: 10px;
+        font-size: 8px;
       }
     }
   }
   
-  /* Estilos para o Modal */
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro translúcido */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  
-}
-
-.modalContent {
-  position: relative;
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 90%;
-  max-height: 90%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  
-}
-
-.modalImage {
-  max-width: 100%;
-  max-height: 80vh;
-  object-fit: contain;
-}
-
-.closeButton {
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  top: 0;
-  right: 0;
-  background-color: red;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  cursor: pointer;
-  font-size: 1.5rem;
-  border-bottom-left-radius: 10px;
-  border-top-right-radius: 10px;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: darkred;
-  }
-}
-
-/* Estilos para os botões de navegação */
-.navButton {
-  border: none;
-  background: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    transform: scale(1.3);
-  }
-}
-
-.divNav{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
   

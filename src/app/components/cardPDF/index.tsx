@@ -17,14 +17,12 @@ return (
       <div className={styles.cardContainer} >
         <div className={styles.cardContent}>  
         <button onClick={() => handleDownload(doc)} rel="noopener noreferrer">
-            <Image className={styles.cardImage} width={128} height={128} src={imgPDF} alt="" quality={100} priority={true}/>        
+            <Image className={styles.cardImage} width={90} height={90} src={imgPDF} alt="" quality={100} priority={true}/>        
          </button>
            <h3>{docName}</h3>
            <p>{date}</p>
         </div>       
-      </div>
-
-      
+      </div>     
     </>    
     );
   }; 

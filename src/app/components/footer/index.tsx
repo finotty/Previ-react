@@ -32,6 +32,7 @@ export default function Footer() {
                 height={50} 
               /> 
           <p>Prefeitura de Japeri: Estrada São Pedro, 987 - Teófilo Cunha - 26443-210</p>
+          <p>TEL: (21) 97586-7089</p>
           <p>&copy; {new Date().getFullYear()} Previ Japeri. Todos os direitos reservados.</p>
         </div>
         {/* Seção de redes sociais */}
