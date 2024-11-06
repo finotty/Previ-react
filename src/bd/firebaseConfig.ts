@@ -7,6 +7,8 @@ import { getStorage } from 'firebase/storage';
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration main
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyDeRvY5kt8h7Wtsy5Wiocm0mHJKZLHObXQ",
   authDomain: "previ-pmj.firebaseapp.com",
@@ -16,7 +18,8 @@ const firebaseConfig = {
   appId: "1:608647635223:web:163e4cf6ed868c89d81752"
 };
 
-/* banco de testes
+
+/*
 const firebaseConfig = {//banco de testes
   apiKey: "AIzaSyBxSJK-OOBCB1aUnNz2Ei3LBKGedPCu-uc",
   authDomain: "previ-teste-defd6.firebaseapp.com",

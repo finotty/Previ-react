@@ -41,6 +41,7 @@ export default function noticiasEcomunicados() {
   };
 
   useEffect(() => {
+    
     const fetchUploads = async () => {
       const querySnapshot = await getDocs(collection(db, 'news-noticiasComunicados'));
       const uploadsData: Upload[] = [];
