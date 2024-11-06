@@ -190,6 +190,11 @@ export default function Header(){
                              Diretoria Executiva
                             </Link>
                         </li>
+                        <li>
+                            <Link className={styles.dropdownItem}  href="/institucional/codigo-etica" onClick={handleToggleMenu} passHref>
+                             Código de ética
+                            </Link>
+                        </li>
                         
                         </ul>
                     )}
