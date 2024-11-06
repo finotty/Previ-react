@@ -11,7 +11,7 @@ interface Upload {
   title: string;
   description: string;
   date: string;
-  fileUrl: string;
+  fileUrl: string[] | string;
   created_at:Timestamp;
 }
 

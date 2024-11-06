@@ -75,7 +75,7 @@
 .divInputs{
   display: flex;
   flex-direction: column;
-  margin-top: 40px;
+  margin-top: 45px;
   //background-color: red;
   @media(max-width:768px){
     width: 100%;
@@ -114,8 +114,32 @@
     }
   }
   div{
-    margin-bottom: 50px;
+    margin-bottom: 5px;
   }
+}
+
+.divArquivo{
+ 
+  margin-top: -35px;
+  margin-bottom: 15px;
+
+}
+.divRadio{
+ // background-color: red;
+  display: flex;
+  margin-top: 10px;
+  flex-direction: row;
+  input{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+  }
+ p{
+  margin-right: 5px;
+ }
+}
+.divRadioFalse{
+  display: none;
 }
 
 .divSelect{

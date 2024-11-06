@@ -151,12 +151,12 @@ export default function Header(){
                         </li>
                         <li>
                             <Link className={styles.dropdownItem}  href="/transparencia/relatorios-aplicacao-resgate" onClick={handleToggleMenu} passHref>
-                             Relatórios de Aplicações e Resgate
+                             Relatórios de Aplicações e Resgate (APR)
                             </Link>
                         </li>
                         <li>
                             <Link className={styles.dropdownItem}  href="/transparencia/relatorios-previdenciarios" onClick={handleToggleMenu} passHref>
-                             Relatorios Previdenciários
+                             Relatorios Previdenciários (DIPR)
                             </Link>
                         </li>
                         <li>
@@ -297,12 +297,12 @@ export default function Header(){
                         </li>
                         <li>
                             <Link className={styles.dropdownItem}  href="/transparencia/relatorios-aplicacao-resgate" onClick={handleToggleMenu} passHref>
-                             Relatórios de Aplicações e Resgate
+                             Relatórios de Aplicações e Resgate (APR)
                             </Link>
                         </li>
                         <li>
                             <Link className={styles.dropdownItem}  href="/transparencia/relatorios-previdenciarios" onClick={handleToggleMenu} passHref>
-                             Relatorios Previdenciários
+                             Relatorios Previdenciários (DIPR)
                             </Link>
                         </li>
                         <li>

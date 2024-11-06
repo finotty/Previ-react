@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import styles from './styles.module.scss';
 import { app, db, storage } from '@/bd/firebaseConfig';
 import { collection, addDoc,Timestamp  } from 'firebase/firestore';
-import { ref, uploadBytes } from 'firebase/storage';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { getAuth , onAuthStateChanged} from "firebase/auth";
 
 export default function UploadPage() {
@@ -11,9 +11,10 @@ export default function UploadPage() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
-  const [file, setFile] = useState<File | null>(null);
+  const [file, setFile] = useState<File[]>([]);
   const [isloading, setIsloading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false); 
+  const [selectedOption, setSelectedOption] = useState('pdf');
  // const [user, setUser ]= useState<any>();
   const auth = getAuth(app);
   // Definindo as opções com base na página selecionada
@@ -49,13 +50,17 @@ export default function UploadPage() {
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setFile(e.target.files[0]);
-    }
+    setFile(e.target.files ? Array.from(e.target.files) : []);
   };
-
+  const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedOption(e.target.value);
+  };
     // Determine placeholder text and input type for the date field
-  const datePlaceholder = formData.sub === 'conselhoADM' ? 'Digite o número da ATA' : formData.sub === 'relatoriosAPK' ? 'Digite o número da APR/ano ex. 001/2024' : formData.sub === 'conselhoFiscal' ? 'Digite o número da ATA' :'';
+  const datePlaceholder = 
+  formData.sub === 'conselhoADM' ? 'Digite o número da ATA' : 
+  formData.sub === 'relatoriosAPK' ? 'Digite o número da APR/ano ex. 001/2024' : 
+  formData.sub === 'conselhoFiscal' ? 'Digite o número da ATA' :
+  selectedOption === 'imagem'?'Digite um link (opcional)':'';
   const inputType = (
       formData.sub === 'conselhoADM' || 
       formData.sub === 'conselhoFiscal' || 
@@ -65,7 +70,8 @@ export default function UploadPage() {
       formData.sub === 'relatoriosAPK' ||
       formData.sub === 'relatoriosPrevidenciarios'||
       formData.sub === 'diretoriaExecutiva' ||
-      formData.sub === 'comiteInvestimentos'
+      formData.sub === 'comiteInvestimentos' ||
+      selectedOption === 'imagem'
     ) ? 'text' : 'date';
 
    // Conditional disabling of the textarea field
@@ -76,19 +82,25 @@ export default function UploadPage() {
   formData.sub === 'fundoPrevidenciario' || 
   formData.sub === 'relatoriosAPK' || 
   formData.sub === 'relatoriosPrevidenciarios' ||
-  formData.sub === 'CRP'
+  formData.sub === 'CRP' ||
+  selectedOption === 'imagem'
   );
 
   const handleSubmit = async (e: React.FormEvent)=> {
     e.preventDefault();
-    if (!file) return;
+    if (file.length === 0) return;
 
     setIsSubmitting(true); // Disable the button and show loading
     
     try {
+      const fileUrls = [];
       // Upload the file to Firebase Storage
-      const fileRef = ref(storage, `uploads/${file.name}`);
-      await uploadBytes(fileRef, file);
+      for (const files of file) {
+        const fileRef = ref(storage, `uploads/${files.name}`);
+        await uploadBytes(fileRef, files);
+        const fileUrl = await getDownloadURL(fileRef);
+        fileUrls.push(fileUrl);
+      }
 
       // Save the information to Firestore
       const local = `${formData.pagina}-${formData.sub}`;
@@ -96,7 +108,7 @@ export default function UploadPage() {
         title,
         description,
         date: formData.sub === 'conselhoADM' ? `ATA N° ${date}` : formData.sub === 'relatoriosAPK' ? `APR ${date}` : date,
-        fileUrl: `uploads/${file.name}`,
+        fileUrl: fileUrls,
         created_at: Timestamp.now()
       });
 
@@ -104,7 +116,7 @@ export default function UploadPage() {
       setTitle('');
       setDescription('');
       setDate('');
-      setFile(null);
+      setFile([]);
     } catch (error) {
       console.error("Error uploading document: ", error);
     } finally {
@@ -136,10 +148,14 @@ export default function UploadPage() {
               <div className={styles.divFormIn}>
                 <div className={styles.divLabel}>
                   <label className={styles.labelPage}>Pagina:</label>
+                  <div className={styles.divArquivo}>
+                    <label>Tipo de arquivo:</label>
+                    
+                  </div>
                   <label>Titulo:</label>
-                  <label className={styles.labelDate}>Data do arquivo:</label>
+                  <label className={styles.labelDate}>{ selectedOption === 'imagem'?"Link: ":"Data do arquivo: "}</label>
                   <label>Descrição:</label>
-                  <label className={styles.labelPDF}>Arquivo PDF:</label>
+                  <label className={styles.labelPDF}>Arquivo:</label>
                 </div>
 
                 <div className={styles.divInputs}>
@@ -151,8 +167,7 @@ export default function UploadPage() {
                       onChange={handleChange}
                       required
                     >
-                      <option value="">Selecione uma página</option>
-                      {/*<option value="home">Home</option>*/}
+                      <option value="">Selecione uma página</option>     
                       <option value="news">News</option>
                       <option value="governanca">Governança</option>
                       <option value="transparencia">Transparência</option>
@@ -175,7 +190,29 @@ export default function UploadPage() {
                       ))}
                     </select>
                   </div>
-
+                  
+                  <div className={styles.divRadio}>
+                      <input
+                        type="radio"
+                        value="pdf"
+                        checked={selectedOption === 'pdf'}
+                        onChange={handleOptionChange}
+                        disabled={formData.sub !== 'noticiasComunicados'}
+                      />
+                  <p>
+                      PDF
+                    </p>
+                      <input
+                        type="radio"
+                        value="imagem"
+                        checked={selectedOption === 'imagem'}
+                        onChange={handleOptionChange}
+                        disabled={formData.sub !== 'noticiasComunicados'}
+                      />
+                    <p>
+                      Imagem
+                    </p>
+                  </div>
                   <input
                     type="text"
                     value={title}
@@ -190,6 +227,7 @@ export default function UploadPage() {
                     required
                     placeholder={datePlaceholder}
                     type={inputType}
+                   // disabled={selectedOption === 'imagem'}
                   />
 
                   <textarea
@@ -201,10 +239,13 @@ export default function UploadPage() {
 
                   <input
                     type="file"
-                    accept="application/pdf"
+                    accept={selectedOption === 'imagem' ? 'image/*' : 'application/pdf'}
+                    multiple={selectedOption === 'imagem'}
                     onChange={handleFileChange}
                     required
                   />
+                  
+
 
                   <button
                     type="submit"

@@ -1,5 +1,5 @@
 .cardContainer {
-    width: 300px;
+    width: 280px;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -28,7 +28,17 @@
     border-radius: 5px;
     
   }
-  
+  .cardImageDownload{
+
+    width: 250px;
+    height: 310px;
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .isArray{
+    display: none;
+  }
   .cardContent {
     flex: 1 1 calc(25% ); 
     max-width: calc(25% ); 
@@ -37,13 +47,27 @@
     padding: 10px;
     
   }
-  
+  .cardContentIMG{
+    flex: 1 1 calc(25% ); 
+    max-width: calc(25% ); 
+    min-width: 260px;          
+    box-sizing: border-box;
+    padding-bottom: 5px;
+
+  }
   .cardTitle {
     font-size: 16px;
     color: var(--black);
     text-align: left;
+    text-transform: uppercase;
   }
-
+ .cardTitleIMG{
+  font-size: 16px;
+  color: var(--black);
+  text-align: center;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+ }
   .divDate{
     display: flex;
     width: 100%;
@@ -52,8 +76,7 @@
   
   .cardDate {
     font-size: 14px;
-    color: #999;
-    
+    color: #999;   
   }
   
   .cardDescription {
@@ -75,6 +98,63 @@
   
     &:hover {
       background-color: #45a049;
+    }
+  }
+
+  .modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modalContent {
+   display: flex; 
+   justify-content: center;
+   border-radius: 8px;
+   overflow: hidden;
+ 
+    
+  }
+  
+  .modalImage {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  .navButton {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0 1rem;
+  
+    &:hover {
+      color: #ddd;
+    }
+  }
+  .divModalIMG{
+    
+    width: 58%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   // background-color: #ddd;
+    
+    
+    button{
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      align-self: flex-end;
     }
   }
   
