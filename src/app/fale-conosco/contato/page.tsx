@@ -20,10 +20,33 @@ const Contato = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Lógica para enviar o formulário ou validação
-    console.log("Dados do formulário:", formData);
+    
+    try {
+      const response = await fetch('/api/sendEmail', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+  
+      if (response.ok) {
+        alert('E-mail enviado com sucesso!');
+        setFormData({
+          nomeCompleto: "",
+          matricula: "",
+          status: "",
+          email: "",
+          servico: "",
+          mensagem: "",
+        });
+      } else {
+        alert('Erro ao enviar o e-mail.');
+      }
+    } catch (error) {
+      console.error('Erro:', error);
+      alert('Erro ao enviar o e-mail.');
+    }
   };
 
   return (
