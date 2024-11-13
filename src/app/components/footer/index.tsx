@@ -38,14 +38,14 @@ export default function Footer() {
         {/* Seção de redes sociais */}
         <div className={styles.socialMediaSection}>
          
-              <Link href="https://facebook.com">
+             {/* <Link href="https://facebook.com">
                 <Image className={styles.imgFB}
                  src={fb}
                  alt=''
                  width={50}
                  height={50}
                 />
-              </Link>
+              </Link>*/}
          
         </div>
       </div>

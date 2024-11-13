@@ -1,8 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import styles from "./styles.module.scss";
+import { toast } from "sonner";
 
 const Contato = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     nomeCompleto: "",
     matricula: "",
@@ -22,7 +24,7 @@ const Contato = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+    setIsLoading(true);
     try {
       const response = await fetch('/api/sendEmail', {
         method: 'POST',
@@ -31,7 +33,8 @@ const Contato = () => {
       });
   
       if (response.ok) {
-        alert('E-mail enviado com sucesso!');
+       toast.success('Enviado com sucesso!');
+       setIsLoading(false);
         setFormData({
           nomeCompleto: "",
           matricula: "",
@@ -41,13 +44,26 @@ const Contato = () => {
           mensagem: "",
         });
       } else {
-        alert('Erro ao enviar o e-mail.');
+        toast.warning('Erro ao enviar.');
+        setIsLoading(false);
       }
     } catch (error) {
       console.error('Erro:', error);
-      alert('Erro ao enviar o e-mail.');
+      toast.warning('Erro ao enviar.');
+      setIsLoading(false);
     }
   };
+
+  const handleClear = () => {
+    setFormData({
+      nomeCompleto: "",
+      matricula: "",
+      status: "",
+      email: "",
+      servico: "",
+      mensagem: "",
+    })
+  }
 
   return (
     <div className={styles.formContainer}>
@@ -83,8 +99,8 @@ const Contato = () => {
           />
         </div>
         {/* Status */}
-        <div className={styles.inputContainer}>
-        <label className={styles.inputLabel} htmlFor="status">Status *</label>
+        <div className={styles.inputContainer2}>
+        <label className={styles.inputLabel2} htmlFor="status">Status * </label>
         <select
           id="status"
           name="status"
@@ -113,8 +129,8 @@ const Contato = () => {
         />
         </div>
         {/* Serviço */}
-        <div className={styles.inputContainer}>
-        <label className={styles.inputLabel} htmlFor="servico">Serviço *</label>
+        <div className={styles.inputContainer2}>
+        <label className={styles.inputLabel2} htmlFor="servico">Serviço *</label>
         <select
           id="servico"
           name="servico"
@@ -132,8 +148,8 @@ const Contato = () => {
         </select>
         </div>
         {/* Mensagem */}
-        <div className={styles.inputContainer}>
-        <label className={styles.inputLabel} htmlFor="mensagem">Mensagem *</label>
+        <div className={styles.inputContainer2}>
+        <label className={styles.inputLabel2} htmlFor="mensagem">Mensagem *</label>
         <textarea
           id="mensagem"
           name="mensagem"
@@ -145,8 +161,10 @@ const Contato = () => {
         </div>
 
          <div className={styles.buttonSendClear}>
-          <button className={styles.clear} type="submit">Limpar</button>
-          <button className={styles.send} type="submit">Enviar</button>
+          <button className={styles.clear} onClick={handleClear}>Limpar</button>
+          <button className={styles.send} type="submit" disabled={isLoading} >
+            {isLoading ?<div className={styles.spinner}></div>:"Enviar" }
+            </button>
         </div>
       </form>
     </div>

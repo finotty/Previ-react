@@ -5,6 +5,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 import { app } from '@/bd/firebaseConfig';
 import { getAuth,signInWithEmailAndPassword } from "firebase/auth";
+import { toast } from 'sonner';
 
 export default function Login(){
   const [showPassword, setShowPassword] = useState(false); // Estado para alternar visibilidade da senha
@@ -23,31 +24,32 @@ export default function Login(){
     setIsloading(true);
       if(!email || !password){
       setIsloading(false)
-      return alert('Informe Usuario e Senha!');
+      return toast.warning('Informe Usuario e Senha!');
       }
 
       signInWithEmailAndPassword(auth,email, password)
       .then(() => {
+        toast.success("Loguin efetuado com sucesso!")
         router.push('/admin'); 
       })
       .catch((error) => {
        console.log(error.code);
         if(error.code =='auth/user-not-found'){
           setIsloading(false);
-        return alert('Usuario ou senha incorretos.')
+        return toast.warning('Usuario ou senha incorretos.')
         }
         if(error.code =='auth/wrong-password'){
           setIsloading(false);
-         return alert('Usuario ou senha incorretos.')
+         return toast.warning('Usuario ou senha incorretos.')
         }
   
         if(error.code =='auth/invalid-email'){
           setIsloading(false);
-          return alert('Usuario ou senha incorretos.')
+          return toast.warning('Usuario ou senha incorretos.')
          }
          if(error.code =='auth/invalid-credential'){
             setIsloading(false);
-            return alert('Usuario ou senha incorretos.')
+            return toast.warning('Usuario ou senha incorretos.')
            }
        setIsloading(false);
       })

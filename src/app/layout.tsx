@@ -5,6 +5,7 @@ import Header from "./components/header";
 import ImageContainer from "./components/imageContainer";
 import Footer from "./components/footer";
 import Home from "./page";
+import { Toaster } from "sonner";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -30,6 +31,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <Toaster
+         position="bottom-right"
+         richColors
+        />
         <Header />
         <ImageContainer/>
         {children || <Home/>}

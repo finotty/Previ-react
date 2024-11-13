@@ -54,11 +54,11 @@ export default function Header(){
                              Contatos
                             </Link>
                         </li>
-                        <li>
+                       { /*<li>
                             <Link className={styles.dropdownItem}  href="/Home" onClick={handleToggleMenu} passHref>
                              Nossa página no Facebook
                             </Link>
-                        </li>
+                        </li>*/}
                      
                         </ul>
                     )}
@@ -362,11 +362,11 @@ export default function Header(){
                              Contatos
                             </Link>
                         </li>
-                        <li>
+                        { /*<li>
                             <Link className={styles.dropdownItem}  href="/Home" onClick={handleToggleMenu} passHref>
                              Nossa página no Facebook
                             </Link>
-                        </li>
+                        </li>*/}
                      
                         </ul>
                     )}
